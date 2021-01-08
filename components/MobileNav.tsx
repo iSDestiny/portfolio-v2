@@ -1,6 +1,8 @@
-import { Box, Link, useColorMode, VStack } from '@chakra-ui/react';
+import { Box, HStack, Link, useColorMode, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import MotionBox from './MotionBox';
+import Socials from './Socials';
 
 const MobileNav = ({ isOpen }: { isOpen: boolean }) => {
     const router = useRouter();
@@ -94,6 +96,7 @@ const MobileNav = ({ isOpen }: { isOpen: boolean }) => {
                     </Link>
                 </Box>
             </VStack>
+            {router.pathname !== '/' && <Socials />}
         </MotionBox>
     );
 };
