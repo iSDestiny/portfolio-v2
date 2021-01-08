@@ -1,18 +1,17 @@
-// import styles from 'styles/Home.module.scss';
-import { FaLinkedin, FaGithub, FaTwitter } from 'react-icons/fa';
 import {
-    Flex,
     Box,
-    Text,
     Button,
-    Link,
+    Flex,
     HStack,
+    Text,
     useColorMode
 } from '@chakra-ui/react';
-import { useRouter } from 'next/router';
 import MotionBox from 'components/MotionBox';
-import Navbar from 'components/Navbar';
 import Socials from 'components/Socials';
+import dynamic from 'next/dynamic';
+import { useRouter } from 'next/router';
+
+const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
 
 const About = () => {
     const router = useRouter();
@@ -27,11 +26,18 @@ const About = () => {
                 align="center"
                 height="calc(100vh - 80px)"
             >
-                <Flex
+                <MotionBox
+                    as={Flex}
+                    opacity="0"
+                    animate={{ opacity: 1 }}
+                    transition={{
+                        delay: 0.3
+                    }}
+                    exit={{ opacity: 0 }}
                     justify="center"
                     align="center"
                     direction="column"
-                    width={['100%', '100%', 700]}
+                    maxWidth="700px"
                     p="0 1rem"
                 >
                     <Box>
@@ -69,7 +75,7 @@ const About = () => {
                         </Button>
                     </HStack>
                     <Socials />
-                </Flex>
+                </MotionBox>
             </Flex>
         </>
     );

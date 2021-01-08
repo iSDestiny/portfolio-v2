@@ -1,10 +1,13 @@
-import { Box, HStack, Link, useColorMode, VStack } from '@chakra-ui/react';
+import { Box, Link, useColorMode, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { FaGithub, FaLinkedin, FaTwitter } from 'react-icons/fa';
 import MotionBox from './MotionBox';
-import Socials from './Socials';
 
-const MobileNav = ({ isOpen }: { isOpen: boolean }) => {
+interface MobileNavProps {
+    isOpen: boolean;
+    toggleIsOpen: any;
+}
+
+const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
     const router = useRouter();
     const { colorMode } = useColorMode();
     const selectedBorder = (pathname: string, path: string) => {
@@ -42,11 +45,13 @@ const MobileNav = ({ isOpen }: { isOpen: boolean }) => {
 
     return (
         <MotionBox
-            initial={'closed'}
+            transform="translateY(-100%)"
+            initial={false}
             animate={isOpen ? 'open' : 'closed'}
             as="nav"
             width="100%"
             variants={menuVariants}
+            exit="closed"
             height="100vh"
             bg={colorMode === 'light' ? 'gray.50' : 'gray.900'}
             position="fixed"
@@ -96,7 +101,6 @@ const MobileNav = ({ isOpen }: { isOpen: boolean }) => {
                     </Link>
                 </Box>
             </VStack>
-            {router.pathname !== '/' && <Socials />}
         </MotionBox>
     );
 };

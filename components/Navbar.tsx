@@ -20,7 +20,7 @@ import MobileNav from './MobileNav';
 const Navbar = () => {
     const [isMenuOpen, toggleMenuOpen] = useCycle(false, true);
     const { colorMode, toggleColorMode } = useColorMode();
-    const [isMobileSize] = useMediaQuery('(max-width: 600px)');
+
     const router = useRouter();
     const selectedBorder = (pathname: string, path: string) => {
         const borderBottom = '4px solid teal';
@@ -35,12 +35,15 @@ const Navbar = () => {
         if (path === 'About') return router.push('/');
         return router.push(path.toLowerCase());
     };
-
+    const [isMobileSize] = useMediaQuery('(max-width: 600px)');
     const isMenuOpenAndMobileMode = isMobileSize && isMenuOpen;
 
     return (
         <>
-            {<MobileNav isOpen={isMenuOpenAndMobileMode} />}
+            <MobileNav
+                isOpen={isMenuOpenAndMobileMode}
+                toggleIsOpen={toggleMenuOpen}
+            />
             <header>
                 <Flex
                     justify="space-between"
@@ -115,8 +118,9 @@ const Navbar = () => {
                         </HStack>
                         {isMobileSize && (
                             <MotionBox
-                                as="nav"
+                                as="li"
                                 zIndex="2"
+                                exit="closed"
                                 initial={false}
                                 animate={isMenuOpen ? 'open' : 'closed'}
                             >
