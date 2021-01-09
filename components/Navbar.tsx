@@ -20,21 +20,7 @@ import MobileNav from './MobileNav';
 const Navbar = () => {
     const [isMenuOpen, toggleMenuOpen] = useCycle(false, true);
     const { colorMode, toggleColorMode } = useColorMode();
-
     const router = useRouter();
-    const selectedBorder = (pathname: string, path: string) => {
-        const borderBottom = '4px solid teal';
-        if (
-            (pathname === 'About' && path === '/') ||
-            '/' + pathname.toLowerCase() === path
-        )
-            return borderBottom;
-        return '0';
-    };
-    const goToNavPath = (path: string) => {
-        if (path === 'About') return router.push('/');
-        return router.push('/' + path.toLowerCase());
-    };
 
     return (
         <>
@@ -52,29 +38,40 @@ const Navbar = () => {
                         <h1>Icon</h1>
                     </Box>
                     <HStack as="ul" spacing="1.5rem" listStyleType="none">
-                        {['About', 'Projects'].map((path) => (
-                            <Box
-                                as="li"
-                                key={path}
-                                display={{ base: 'none', md: 'block' }}
-                            >
+                        <Box as="li" display={{ base: 'none', md: 'block' }}>
+                            <NextLink href="/" passHref>
                                 <Link
-                                    borderBottom={`${selectedBorder(
-                                        path,
-                                        router.pathname
-                                    )}`}
-                                    aria-label={path.toLowerCase()}
-                                    href="#"
+                                    borderBottom={
+                                        router.pathname === '/'
+                                            ? '4px solid teal'
+                                            : 'none'
+                                    }
                                     pb="3px"
                                     _hover={{
                                         borderBottom: '4px solid teal'
                                     }}
-                                    onClick={() => goToNavPath(path)}
                                 >
-                                    {path}
+                                    About
                                 </Link>
-                            </Box>
-                        ))}
+                            </NextLink>
+                        </Box>
+                        <Box as="li" display={{ base: 'none', md: 'block' }}>
+                            <NextLink href="/projects" passHref>
+                                <Link
+                                    borderBottom={
+                                        router.pathname === '/projects'
+                                            ? '4px solid teal'
+                                            : 'none'
+                                    }
+                                    pb="3px"
+                                    _hover={{
+                                        borderBottom: '4px solid teal'
+                                    }}
+                                >
+                                    Projects
+                                </Link>
+                            </NextLink>
+                        </Box>
                         <Box as="li" display={{ base: 'none', md: 'block' }}>
                             <Link
                                 href="mailto:jasonbugallon@gmail.com"

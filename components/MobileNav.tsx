@@ -1,3 +1,4 @@
+import NextLink from 'next/link';
 import { Box, Link, useColorMode, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { useEffect } from 'react';
@@ -11,20 +12,6 @@ interface MobileNavProps {
 const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
     const router = useRouter();
     const { colorMode } = useColorMode();
-    const selectedBorder = (pathname: string, path: string) => {
-        const borderBottom = '6px solid teal';
-        if (
-            (pathname === 'About' && path === '/') ||
-            '/' + pathname.toLowerCase() === path
-        )
-            return borderBottom;
-        return '0';
-    };
-    const goToNavPath = (path: string) => {
-        toggleIsOpen();
-        if (path === 'About') return router.push('/');
-        return router.push(path.toLowerCase());
-    };
 
     const menuVariants = {
         open: {
@@ -75,26 +62,42 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
                 height="100%"
                 spacing="1.5rem"
             >
-                {['About', 'Projects'].map((path) => (
-                    <Box as="li" key={path}>
+                <Box as="li">
+                    <NextLink href="/" passHref>
                         <Link
                             fontSize="2rem"
-                            borderBottom={`${selectedBorder(
-                                path,
-                                router.pathname
-                            )}`}
-                            aria-label={path.toLowerCase()}
-                            href="#"
+                            borderBottom={
+                                router.pathname === '/'
+                                    ? '6px solid teal'
+                                    : 'none'
+                            }
                             pb="3px"
                             _hover={{
                                 borderBottom: '6px solid teal'
                             }}
-                            onClick={() => goToNavPath(path)}
                         >
-                            {path}
+                            About
                         </Link>
-                    </Box>
-                ))}
+                    </NextLink>
+                </Box>
+                <Box as="li">
+                    <NextLink href="/projects" passHref>
+                        <Link
+                            fontSize="2rem"
+                            borderBottom={
+                                router.pathname === '/projects'
+                                    ? '6px solid teal'
+                                    : 'none'
+                            }
+                            pb="3px"
+                            _hover={{
+                                borderBottom: '6px solid teal'
+                            }}
+                        >
+                            Projects
+                        </Link>
+                    </NextLink>
+                </Box>
                 <Box as="li">
                     <Link
                         onClick={toggleIsOpen}
