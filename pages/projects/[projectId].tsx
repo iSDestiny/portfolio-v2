@@ -1,11 +1,12 @@
-import { Box, Flex, Grid, GridItem, Heading } from '@chakra-ui/react';
-import MotionBox from 'components/MotionBox';
-import Project, { Project as ProjectType } from 'components/Project';
-import { useState } from 'react';
 import Navbar from 'components/Navbar';
+import { Project } from 'components/Project';
+import { useState } from 'react';
+import { useRouter } from 'next/router';
 
-const Projects = () => {
-    const [projects, setProjects] = useState<ProjectType[]>([
+const ProjectPage = () => {
+    const router = useRouter();
+    const { projectId } = router.query;
+    const [projects, setProjects] = useState<Project[]>([
         {
             id: 'asdf123',
             name: 'Fabflix',
@@ -52,43 +53,8 @@ I looked at several applications as references for MarkdownV. Specifically, I to
     return (
         <>
             <Navbar />
-            <Flex
-                as="main"
-                my="1rem"
-                width="100%"
-                maxW="700px"
-                margin="auto"
-                justify="center"
-                align="center"
-                direction="column"
-                px="1rem"
-                pb="2rem"
-            >
-                <MotionBox
-                    opacity="0"
-                    animate={{ opacity: 1 }}
-                    transition={{
-                        delay: 0.2
-                    }}
-                    exit={{ opacity: 0 }}
-                >
-                    <Heading as="h1" textAlign="center" mb="2rem">
-                        Projects
-                    </Heading>
-                </MotionBox>
-                <Grid
-                    templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
-                    gap={10}
-                >
-                    {projects.map((project) => (
-                        <GridItem key={project.id}>
-                            <Project project={project} />
-                        </GridItem>
-                    ))}
-                </Grid>
-            </Flex>
         </>
     );
 };
 
-export default Projects;
+export default ProjectPage;

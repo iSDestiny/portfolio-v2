@@ -33,7 +33,7 @@ const Navbar = () => {
     };
     const goToNavPath = (path: string) => {
         if (path === 'About') return router.push('/');
-        return router.push(path.toLowerCase());
+        return router.push('/' + path.toLowerCase());
     };
 
     return (

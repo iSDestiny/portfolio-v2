@@ -11,7 +11,9 @@ import {
     Tooltip,
     useBreakpointValue
 } from '@chakra-ui/react';
-import { MouseEvent, useState } from 'react';
+import { useRouter } from 'next/router';
+import NextLink from 'next/link';
+import { KeyboardEvent, MouseEvent, useState } from 'react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import MotionBox from './MotionBox';
 
@@ -31,8 +33,9 @@ interface ProjectProps {
 }
 
 const Project = ({
-    project: { name, shortDescription, stack, images, source, live }
+    project: { id, name, shortDescription, stack, images, source, live }
 }: ProjectProps) => {
+    const router = useRouter();
     const [isOverlayOpen, setisOverlayOpen] = useState(false);
     const buttonSize = useBreakpointValue({ base: 'sm', sm: 'md', xl: 'lg' });
     const variants = {
@@ -55,22 +58,33 @@ const Project = ({
     };
 
     const learnMoreHandler = (
-        event: MouseEvent<HTMLButtonElement, globalThis.MouseEvent>
+        event: MouseEvent<HTMLElement, globalThis.MouseEvent>
     ) => {
         event.stopPropagation();
+        router.push(`/projects/${id}`);
+    };
+
+    const onPressEnter = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter') router.push(`/projects/${id}`);
     };
 
     return (
         <MotionBox
+            _focus={{
+                outline: '4px solid teal'
+            }}
             aria-label={`${name} project`}
             as={Flex}
             onMouseEnter={() => setisOverlayOpen(true)}
             onMouseLeave={() => setisOverlayOpen(false)}
+            onKeyDown={(e) => onPressEnter(e)}
+            tabIndex={0}
+            onSelect={() => setisOverlayOpen(true)}
             position="relative"
             opacity="0"
             animate={{ opacity: 1 }}
             transition={{
-                delay: 0.3
+                delay: 0.2
             }}
             exit={{ opacity: 0 }}
             bg={`url(${images[0]}) no-repeat`}
@@ -88,6 +102,9 @@ const Project = ({
             <MotionBox
                 bgColor="rgba(0,0,0,0.6)"
                 as={Flex}
+                display="flex"
+                onClick={(e) => learnMoreHandler(e)}
+                tab-index="1"
                 direction="column"
                 align="center"
                 justify="space-between"
@@ -99,7 +116,6 @@ const Project = ({
                 animate={isOverlayOpen ? 'open' : 'closed'}
                 variants={variants}
                 transition={{ delay: 0.3 }}
-                p="1rem 3rem"
                 p={{ base: '0.7rem 0', sm: '1rem 3rem' }}
                 cursor="pointer"
             >
