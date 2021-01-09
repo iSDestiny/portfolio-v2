@@ -56,7 +56,6 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                 as="main"
                 my="1rem"
                 width="100%"
-                maxW="700px"
                 margin="auto"
                 justify="center"
                 align="center"
@@ -78,10 +77,14 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                 </MotionBox>
                 <Grid
                     templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
+                    width="100%"
+                    maxWidth="700px"
+                    justifyContent="center"
+                    align="center"
                     gap={10}
                 >
                     {projects.map((project) => (
-                        <GridItem key={project.id}>
+                        <GridItem key={project.id} width="100%">
                             <Project project={project} />
                         </GridItem>
                     ))}
