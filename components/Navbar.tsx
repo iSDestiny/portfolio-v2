@@ -7,12 +7,10 @@ import {
     Link,
     IconButton,
     useColorMode,
-    Tooltip,
-    useMediaQuery
+    Tooltip
 } from '@chakra-ui/react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import MenuToggle from './MenuToggle';
-import { useState } from 'react';
 import { useCycle } from 'framer-motion';
 import MotionBox from './MotionBox';
 import MobileNav from './MobileNav';
