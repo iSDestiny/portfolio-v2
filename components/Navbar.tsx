@@ -45,7 +45,7 @@ const Navbar = () => {
                     align="center"
                     maxW="1200px"
                     margin="auto"
-                    padding={{ base: '0.8rem 1rem', sm: '0.8rem 2rem' }}
+                    padding="0.8rem 1rem"
                     height="65px"
                 >
                     <Box zIndex="2">

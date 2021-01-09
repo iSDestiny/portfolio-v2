@@ -8,13 +8,15 @@ import {
     Tag,
     TagLabel,
     Text,
-    Tooltip
+    Tooltip,
+    useBreakpointValue
 } from '@chakra-ui/react';
 import { MouseEvent, useState } from 'react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import MotionBox from './MotionBox';
 
 export interface Project {
+    id: string;
     name: string;
     shortDescription: string;
     longDescription: string;
@@ -32,6 +34,7 @@ const Project = ({
     project: { name, shortDescription, stack, images, source, live }
 }: ProjectProps) => {
     const [isOverlayOpen, setisOverlayOpen] = useState(false);
+    const buttonSize = useBreakpointValue({ base: 'sm', sm: 'md', xl: 'lg' });
     const variants = {
         open: {
             x: 0,
@@ -67,14 +70,14 @@ const Project = ({
             opacity="0"
             animate={{ opacity: 1 }}
             transition={{
-                delay: 0.2
+                delay: 0.3
             }}
             exit={{ opacity: 0 }}
             bg={`url(${images[0]}) no-repeat`}
             bgSize="100% 100%"
             bgPos="center"
             overflow="hidden"
-            width={{ base: '350px', sm: '450px', xl: '550px' }}
+            width={{ base: '100%', sm: '450px', xl: '550px' }}
             height={{ base: '200px', sm: '300px', xl: '400px' }}
             justify="center"
             align="center"
@@ -92,18 +95,20 @@ const Project = ({
                 width="100%"
                 height="100%"
                 transform="translateX(-100%)"
+                initial={false}
                 animate={isOverlayOpen ? 'open' : 'closed'}
                 variants={variants}
-                transition={{ delay: 0.2 }}
-                padding="1rem 3rem"
+                transition={{ delay: 0.3 }}
+                p="1rem 3rem"
+                p={{ base: '0.7rem 0', sm: '1rem 3rem' }}
                 cursor="pointer"
             >
                 <Box>
                     <Heading
                         as="h1"
                         textAlign="center"
-                        fontSize="1.3rem"
-                        mb="10px"
+                        fontSize={{ base: '1rem', sm: '1.3rem' }}
+                        mb={{ base: '5px', sm: '10px' }}
                         color="white"
                     >
                         {name}
@@ -111,22 +116,22 @@ const Project = ({
                     <Text
                         as="main"
                         textAlign="center"
-                        fontSize="1rem"
+                        fontSize={{ base: '0.8rem', sm: '1rem' }}
                         color="white"
                     >
                         {shortDescription}
                     </Text>
                     <HStack
                         wrap="wrap"
-                        spacing="10px"
+                        spacing={{ base: '5px', sm: '10px' }}
                         justify="center"
-                        mt="1rem"
+                        mt={{ base: '0.5rem', sm: '1rem' }}
                     >
                         {stack.map((tech) => (
                             <Tag
                                 key={tech}
                                 size="sm"
-                                mb="10px"
+                                mb={{ base: '5px', sm: '10px' }}
                                 borderRadius="4px"
                                 variant="solid"
                                 colorScheme="teal"
@@ -165,7 +170,7 @@ const Project = ({
                             <MotionBox
                                 as={Link}
                                 onClick={(e) => e.stopPropagation()}
-                                ariaLabel={`${name} source code`}
+                                aria-label={`${name} source code`}
                                 rel="noopener noreferrer"
                                 href={source}
                                 target="_blank"
@@ -181,6 +186,7 @@ const Project = ({
                     <Button
                         onClick={(e) => learnMoreHandler(e)}
                         variant="solid"
+                        size={buttonSize}
                         colorScheme="teal"
                     >
                         Learn More

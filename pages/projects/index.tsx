@@ -7,6 +7,7 @@ import Navbar from 'components/Navbar';
 const Projects = () => {
     const [projects, setProjects] = useState<ProjectType[]>([
         {
+            id: 'asdf123',
             name: 'Fabflix',
             shortDescription: 'An IMDb-like movie directory website',
             longDescription: `Lorem ipsum dolor sit amet consectetur adipisicing elit. Culpa, eligendi? Ducimus corrupti nisi perspiciatis nulla recusandae quaerat temporibus mollitia, veniam cumque nemo autem eveniet cum repudiandae dolor impedit nostrum? Cumque fuga dolore labore nihil obcaecati doloribus. Quia sint assumenda cupiditate, consequatur eligendi, corrupti dolore velit aspernatur sequi ullam mollitia voluptatum! `,
@@ -16,6 +17,7 @@ const Projects = () => {
             live: 'https://github.com/iSDestiny/Fabflix'
         },
         {
+            id: 'gbxcv123',
             name: 'MarkdownV',
             shortDescription:
                 'Markdown notetaking web app with vim or vscode keybindings',
@@ -58,7 +60,7 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                 justify="center"
                 align="center"
                 direction="column"
-                px="2rem"
+                px="1rem"
                 pb="2rem"
             >
                 <MotionBox
@@ -77,8 +79,8 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                     templateColumns={{ base: '1fr', lg: 'repeat(2, 1fr)' }}
                     gap={10}
                 >
-                    {projects.map((project, index) => (
-                        <GridItem key={index}>
+                    {projects.map((project) => (
+                        <GridItem key={project.id}>
                             <Project project={project} />
                         </GridItem>
                     ))}
