@@ -2,16 +2,15 @@ import {
     Box,
     Button,
     Flex,
+    Heading,
     HStack,
     Text,
     useColorMode
 } from '@chakra-ui/react';
 import MotionBox from 'components/MotionBox';
 import Socials from 'components/Socials';
-import dynamic from 'next/dynamic';
 import { useRouter } from 'next/router';
-
-const Navbar = dynamic(() => import('components/Navbar'), { ssr: false });
+import Navbar from 'components/Navbar';
 
 const About = () => {
     const router = useRouter();
@@ -31,7 +30,7 @@ const About = () => {
                     opacity="0"
                     animate={{ opacity: 1 }}
                     transition={{
-                        delay: 0.3
+                        delay: 0.2
                     }}
                     exit={{ opacity: 0 }}
                     justify="center"
@@ -41,14 +40,15 @@ const About = () => {
                     p="0 1rem"
                 >
                     <Box>
-                        <Text
-                            align="center"
+                        <Heading
+                            textAlign="center"
                             as="h1"
                             fontWeight="bold"
                             fontSize="2rem"
+                            mb="0.6rem"
                         >
                             Hi, I'm Jason
-                        </Text>
+                        </Heading>
                         <Text align="center">
                             I am a software developer and a class of 2020
                             Computer Science graduate from the University of

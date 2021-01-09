@@ -1,5 +1,6 @@
 import { Box, Link, useColorMode, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
+import { useEffect } from 'react';
 import MotionBox from './MotionBox';
 
 interface MobileNavProps {
@@ -20,6 +21,7 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
         return '0';
     };
     const goToNavPath = (path: string) => {
+        toggleIsOpen();
         if (path === 'About') return router.push('/');
         return router.push(path.toLowerCase());
     };
@@ -43,12 +45,18 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
         }
     };
 
+    useEffect(() => {
+        document.body.style.overflowY = isOpen ? 'hidden' : 'auto';
+    }, [isOpen]);
+
     return (
         <MotionBox
+            display={{ base: 'block', md: 'none' }}
             transform="translateY(-100%)"
             initial={false}
             animate={isOpen ? 'open' : 'closed'}
             as="nav"
+            overflow="hidden"
             width="100%"
             variants={menuVariants}
             exit="closed"
@@ -67,7 +75,7 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
                 height="100%"
                 spacing="1.5rem"
             >
-                {['About', 'Projects', 'Contact'].map((path) => (
+                {['About', 'Projects'].map((path) => (
                     <Box as="li" key={path}>
                         <Link
                             fontSize="2rem"
@@ -89,6 +97,22 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
                 ))}
                 <Box as="li">
                     <Link
+                        onClick={toggleIsOpen}
+                        fontSize="2rem"
+                        href="mailto:jasonbugallon@gmail.com"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        pb="3px"
+                        _hover={{
+                            borderBottom: '6px solid teal'
+                        }}
+                    >
+                        Contact
+                    </Link>
+                </Box>
+                <Box as="li">
+                    <Link
+                        onClick={toggleIsOpen}
                         fontSize="2rem"
                         href="/resume.pdf"
                         target="_blank"

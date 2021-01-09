@@ -6,9 +6,9 @@ import Head from 'next/head';
 import { AnimatePresence } from 'framer-motion';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
-    useEffect(() => {
-        if (router.pathname === '/') require('styles/about-globals.scss');
-    });
+    // useEffect(() => {
+    //     if (router.pathname === '/') require('styles/about-globals.scss');
+    // });
 
     return (
         <>

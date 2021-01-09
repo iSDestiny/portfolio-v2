@@ -35,68 +35,71 @@ const Navbar = () => {
         if (path === 'About') return router.push('/');
         return router.push(path.toLowerCase());
     };
-    const [isMobileSize] = useMediaQuery('(max-width: 600px)');
-    const isMenuOpenAndMobileMode = isMobileSize && isMenuOpen;
 
     return (
         <>
-            <MobileNav
-                isOpen={isMenuOpenAndMobileMode}
-                toggleIsOpen={toggleMenuOpen}
-            />
-            <header>
+            <MobileNav isOpen={isMenuOpen} toggleIsOpen={toggleMenuOpen} />
+            <Box as="header">
                 <Flex
                     justify="space-between"
                     align="center"
                     maxW="1200px"
                     margin="auto"
-                    padding="0.8rem 2rem"
+                    padding={{ base: '0.8rem 1rem', sm: '0.8rem 2rem' }}
                     height="65px"
                 >
                     <Box zIndex="2">
                         <h1>Icon</h1>
                     </Box>
                     <HStack as="ul" spacing="1.5rem" listStyleType="none">
-                        {!isMobileSize && (
-                            <>
-                                {['About', 'Projects', 'Contact'].map(
-                                    (path) => (
-                                        <Box as="li" key={path}>
-                                            <Link
-                                                borderBottom={`${selectedBorder(
-                                                    path,
-                                                    router.pathname
-                                                )}`}
-                                                aria-label={path.toLowerCase()}
-                                                href="#"
-                                                pb="3px"
-                                                _hover={{
-                                                    borderBottom:
-                                                        '4px solid teal'
-                                                }}
-                                                onClick={() =>
-                                                    goToNavPath(path)
-                                                }
-                                            >
-                                                {path}
-                                            </Link>
-                                        </Box>
-                                    )
-                                )}
-                                <Box as="li">
-                                    <Link
-                                        href="/resume.pdf"
-                                        target="_blank"
-                                        pb="3px"
-                                        _hover={{
-                                            borderBottom: '4px solid teal'
-                                        }}
-                                    >
-                                        Resume
-                                    </Link>
-                                </Box>
-                            </>
-                        )}
+                        {['About', 'Projects'].map((path) => (
+                            <Box
+                                as="li"
+                                key={path}
+                                display={{ base: 'none', md: 'block' }}
+                            >
+                                <Link
+                                    borderBottom={`${selectedBorder(
+                                        path,
+                                        router.pathname
+                                    )}`}
+                                    aria-label={path.toLowerCase()}
+                                    href="#"
+                                    pb="3px"
+                                    _hover={{
+                                        borderBottom: '4px solid teal'
+                                    }}
+                                    onClick={() => goToNavPath(path)}
+                                >
+                                    {path}
+                                </Link>
+                            </Box>
+                        ))}
+                        <Box as="li" display={{ base: 'none', md: 'block' }}>
+                            <Link
+                                href="mailto:jasonbugallon@gmail.com"
+                                target="_blank"
+                                rel="noopener noreferrer"
+                                pb="3px"
+                                _hover={{
+                                    borderBottom: '4px solid teal'
+                                }}
+                            >
+                                Contact
+                            </Link>
+                        </Box>
+                        <Box as="li" display={{ base: 'none', md: 'block' }}>
+                            <Link
+                                href="/resume.pdf"
+                                target="_blank"
+                                pb="3px"
+                                _hover={{
+                                    borderBottom: '4px solid teal'
+                                }}
+                            >
+                                Resume
+                            </Link>
+                        </Box>
                         <HStack as="li" position="relative">
                             <Tooltip label="Toggle light/dark mode">
                                 <IconButton
@@ -116,20 +119,19 @@ const Navbar = () => {
                                 />
                             </Tooltip>
                         </HStack>
-                        {isMobileSize && (
-                            <MotionBox
-                                as="li"
-                                zIndex="2"
-                                exit="closed"
-                                initial={false}
-                                animate={isMenuOpen ? 'open' : 'closed'}
-                            >
-                                <MenuToggle toggle={() => toggleMenuOpen()} />
-                            </MotionBox>
-                        )}
+                        <MotionBox
+                            as="li"
+                            zIndex="2"
+                            exit="closed"
+                            initial={false}
+                            animate={isMenuOpen ? 'open' : 'closed'}
+                            display={{ base: 'block', md: 'none' }}
+                        >
+                            <MenuToggle toggle={() => toggleMenuOpen()} />
+                        </MotionBox>
                     </HStack>
                 </Flex>
-            </header>
+            </Box>
         </>
     );
 };
