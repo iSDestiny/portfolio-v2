@@ -11,13 +11,22 @@ import MotionBox from 'components/MotionBox';
 import Socials from 'components/Socials';
 import { useRouter } from 'next/router';
 import Navbar from 'components/Navbar';
+import Head from 'next/head';
+import React from 'react';
 
 const About = () => {
     const router = useRouter();
-    const { colorMode } = useColorMode();
 
     return (
         <>
+            <Head>
+                <title>Jason Bugallon's Web Developer Portfolio | About</title>
+                <meta
+                    name="description"
+                    key="description"
+                    content="Jason Bugallon's web developer portfolio"
+                />
+            </Head>
             <Navbar />
             <Flex
                 as="main"

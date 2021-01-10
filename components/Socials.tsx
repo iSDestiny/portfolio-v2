@@ -17,7 +17,7 @@ const Socials = () => {
             <MotionBox
                 as={Link}
                 aria-label="linkedin"
-                href="https://twitter.com/JasonBugallon"
+                href="https://www.linkedin.com/in/jason-matthew-bugallon-37a046147/"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.3 }}
@@ -28,7 +28,7 @@ const Socials = () => {
             <MotionBox
                 as={Link}
                 aria-label="github"
-                href="https://twitter.com/JasonBugallon"
+                href="https://github.com/iSDestiny"
                 target="_blank"
                 rel="noopener noreferrer"
                 whileHover={{ scale: 1.3 }}

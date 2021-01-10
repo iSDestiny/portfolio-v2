@@ -3,6 +3,7 @@ import MotionBox from 'components/MotionBox';
 import Project, { Project as ProjectType } from 'components/Project';
 import { useState } from 'react';
 import Navbar from 'components/Navbar';
+import Head from 'next/head';
 
 const Projects = () => {
     const [projects, setProjects] = useState<ProjectType[]>([
@@ -51,6 +52,16 @@ I looked at several applications as references for MarkdownV. Specifically, I to
 
     return (
         <>
+            <Head>
+                <title key="title">
+                    Jason Bugallon's Web Developer Portfolio | Projects
+                </title>
+                <meta
+                    name="description"
+                    key="description"
+                    content="Jason Bugallon's software projects collection"
+                />
+            </Head>
             <Navbar />
             <Flex
                 as="main"

@@ -2,9 +2,26 @@ import Navbar from 'components/Navbar';
 import { Project } from 'components/Project';
 import { useState } from 'react';
 import { useRouter } from 'next/router';
+import Head from 'next/head';
+import MotionBox from 'components/MotionBox';
+import {
+    Box,
+    Flex,
+    Heading,
+    Stack,
+    Text,
+    Link,
+    Tooltip,
+    useColorMode,
+    HStack,
+    Button
+} from '@chakra-ui/react';
+import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
+import { Carousel } from 'react-responsive-carousel';
 
 const ProjectPage = () => {
     const router = useRouter();
+    const { colorMode } = useColorMode();
     const { projectId } = router.query;
     const [projects, setProjects] = useState<Project[]>([
         {
@@ -50,9 +67,164 @@ I looked at several applications as references for MarkdownV. Specifically, I to
         }
     ]);
 
+    const project = projects.find((proj) => proj.id === projectId);
+
     return (
         <>
+            <Head>
+                <title>
+                    Jason Bugallon's Web Developer Portfolio | {project?.name}
+                </title>
+            </Head>
             <Navbar />
+            <Flex
+                as="main"
+                width="100%"
+                justify="center"
+                align="center"
+                px="2rem"
+                pt="1rem"
+                pb="2rem"
+            >
+                <MotionBox
+                    as={Flex}
+                    opacity="0"
+                    display={project ? 'flex' : 'none'}
+                    animate={{ opacity: 1 }}
+                    transition={{ delay: 0.2 }}
+                    exit={{ opacity: 0 }}
+                    direction="column"
+                    maxW="1000px"
+                    w="100%"
+                >
+                    <Flex
+                        as="header"
+                        width="100%"
+                        justify="space-between"
+                        align={{ base: 'flex-start', md: 'center' }}
+                        direction={{ base: 'column', md: 'row' }}
+                    >
+                        <Box>
+                            <Heading as="h1" size="xl" colorScheme="teal">
+                                {project?.name}
+                            </Heading>
+                            <Heading
+                                as="h2"
+                                fontWeight="500"
+                                size="md"
+                                role="doc-subtitle"
+                                color={
+                                    colorMode === 'light'
+                                        ? 'teal.600'
+                                        : 'teal.400'
+                                }
+                            >
+                                {project?.shortDescription}
+                            </Heading>
+                        </Box>
+                        <HStack
+                            spacing="1.3rem"
+                            align="center"
+                            display={{ base: 'none', md: 'flex' }}
+                            ml="4rem"
+                        >
+                            {project?.live && (
+                                <Tooltip label="Live website">
+                                    <MotionBox
+                                        as={Link}
+                                        aria-label={`${name} live website`}
+                                        href={project?.live}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                        onClick={(e) => e.stopPropagation()}
+                                        whileHover={{ scale: 1.4 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        <FaExternalLinkAlt size="3rem" />
+                                    </MotionBox>
+                                </Tooltip>
+                            )}
+                            {project?.source && (
+                                <Tooltip
+                                    label="Source code"
+                                    colorScheme="white"
+                                >
+                                    <MotionBox
+                                        as={Link}
+                                        onClick={(e) => e.stopPropagation()}
+                                        aria-label={`${name} source code`}
+                                        href={project?.source}
+                                        rel="noopener noreferrer"
+                                        target="_blank"
+                                        whileHover={{ scale: 1.4 }}
+                                        whileTap={{ scale: 0.9 }}
+                                    >
+                                        <FaGithub size="3rem" />
+                                    </MotionBox>
+                                </Tooltip>
+                            )}
+                        </HStack>
+                        <Flex
+                            justify="space-between"
+                            width="100%"
+                            mt="1rem"
+                            display={{ base: 'flex', md: 'none' }}
+                        >
+                            <Button
+                                as="a"
+                                href={project?.live}
+                                colorScheme="teal"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                                size="md"
+                                leftIcon={<FaExternalLinkAlt />}
+                            >
+                                Live Website
+                            </Button>
+                            <Button
+                                as="a"
+                                href={project?.source}
+                                colorScheme="teal"
+                                rel="noopener noreferrer"
+                                target="_blank"
+                                size="md"
+                                leftIcon={<FaGithub />}
+                            >
+                                Source Code
+                            </Button>
+                        </Flex>
+                    </Flex>
+                    <Box
+                        as={Carousel}
+                        boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
+                        my="1rem"
+                        _focus={{
+                            outline: '4px solid teal'
+                        }}
+                        showStatus={false}
+                        showThumbs={false}
+                        swipeable
+                        infiniteLoop
+                        autoPlay
+                        stopOnHover
+                        emulateTouch
+                        useKeyboardArrows
+                        dynamicHeight
+                    >
+                        {project?.images.map((image) => (
+                            <Box>
+                                <img src={image} />
+                            </Box>
+                        ))}
+                    </Box>
+                    <Box as="main" mt="1rem">
+                        <Heading as="h2" size="lg" mb="0.8rem">
+                            About this project
+                        </Heading>
+                        <Text fontSize="lg">{project?.longDescription}</Text>
+                    </Box>
+                </MotionBox>
+            </Flex>
         </>
     );
 };

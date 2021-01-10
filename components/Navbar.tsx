@@ -32,7 +32,7 @@ const Navbar = () => {
                     padding="0.8rem 1rem"
                     height="65px"
                 >
-                    <Box zIndex="2">
+                    <Box zIndex="4">
                         <h1>Icon</h1>
                     </Box>
                     <HStack as="ul" spacing="1.5rem" listStyleType="none">
@@ -99,7 +99,7 @@ const Navbar = () => {
                             <Tooltip label="Toggle light/dark mode">
                                 <IconButton
                                     size="lg"
-                                    zIndex="2"
+                                    zIndex="4"
                                     aria-label="dark light switch"
                                     variant="ghost"
                                     borderRadius="50%"
@@ -116,7 +116,7 @@ const Navbar = () => {
                         </HStack>
                         <MotionBox
                             as="li"
-                            zIndex="2"
+                            zIndex="4"
                             exit="closed"
                             initial={false}
                             animate={isMenuOpen ? 'open' : 'closed'}

@@ -93,6 +93,7 @@ const Project = ({
             transition={{
                 delay: 0.2
             }}
+            borderRadius="5px"
             exit={{ opacity: 0 }}
             width={{ base: '100%', sm: '450px', xl: '550px' }}
             height={{ base: '200px', sm: '300px', xl: '400px' }}
@@ -123,7 +124,6 @@ const Project = ({
                         align="center"
                         cursor="pointer"
                         boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
-                        borderRadius="5px"
                     />
                 </Link>
             </NextLink>

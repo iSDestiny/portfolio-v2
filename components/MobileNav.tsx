@@ -50,7 +50,7 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
             height="100vh"
             bg={colorMode === 'light' ? 'gray.50' : 'gray.900'}
             position="fixed"
-            zIndex="1"
+            zIndex="3"
             top="0"
         >
             <VStack
