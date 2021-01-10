@@ -1,6 +1,6 @@
 import Navbar from 'components/Navbar';
 import { Project } from 'components/Project';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import MotionBox from 'components/MotionBox';
@@ -24,6 +24,7 @@ import {
 } from '@chakra-ui/react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
+import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 
 const ProjectPage = () => {
     const router = useRouter();
@@ -75,6 +76,14 @@ I looked at several applications as references for MarkdownV. Specifically, I to
     ]);
 
     const project = projects.find((proj) => proj.id === projectId);
+
+    useEffect(() => {
+        OverlayScrollbars(document.querySelectorAll('body'), {
+            className:
+                colorMode === 'light' ? 'os-theme-dark' : 'os-theme-light',
+            scrollbars: { autoHide: 'scroll' }
+        });
+    }, [colorMode]);
 
     return (
         <>
@@ -227,14 +236,12 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                         showThumbs={false}
                         swipeable
                         infiniteLoop
-                        autoPlay
-                        stopOnHover
                         emulateTouch
                         useKeyboardArrows
                         dynamicHeight
                     >
-                        {project?.images.map((image) => (
-                            <Box>
+                        {project?.images.map((image, index) => (
+                            <Box key={index}>
                                 <img src={image} />
                             </Box>
                         ))}

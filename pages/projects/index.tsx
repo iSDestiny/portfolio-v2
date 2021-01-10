@@ -1,11 +1,26 @@
-import { Box, Flex, Grid, GridItem, Heading } from '@chakra-ui/react';
+import {
+    Box,
+    Flex,
+    Grid,
+    GridItem,
+    Heading,
+    useColorMode
+} from '@chakra-ui/react';
 import MotionBox from 'components/MotionBox';
 import Project, { Project as ProjectType } from 'components/Project';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import Navbar from 'components/Navbar';
 import Head from 'next/head';
 
 const Projects = () => {
+    const { colorMode } = useColorMode();
+    useEffect(() => {
+        OverlayScrollbars(document.querySelectorAll('body'), {
+            className:
+                colorMode === 'light' ? 'os-theme-dark' : 'os-theme-light',
+            scrollbars: { autoHide: 'scroll' }
+        });
+    }, [colorMode]);
     const [projects, setProjects] = useState<ProjectType[]>([
         {
             id: 'asdf123',
