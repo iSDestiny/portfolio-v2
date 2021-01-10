@@ -14,13 +14,20 @@ import {
     Tooltip,
     useColorMode,
     HStack,
-    Button
+    Button,
+    Wrap,
+    Tag,
+    TagLabel,
+    WrapItem,
+    VStack,
+    useBreakpointValue
 } from '@chakra-ui/react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
 
 const ProjectPage = () => {
     const router = useRouter();
+    const buttonSize = useBreakpointValue({ base: 'sm', sm: 'md' });
     const { colorMode } = useColorMode();
     const { projectId } = router.query;
     const [projects, setProjects] = useState<Project[]>([
@@ -105,7 +112,7 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                         direction={{ base: 'column', md: 'row' }}
                     >
                         <Box>
-                            <Heading as="h1" size="xl" colorScheme="teal">
+                            <Heading as="h1" size="xl">
                                 {project?.name}
                             </Heading>
                             <Heading
@@ -121,10 +128,25 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                             >
                                 {project?.shortDescription}
                             </Heading>
+                            <Wrap spacing="0.7rem" width="100%" mt="1rem">
+                                {project?.stack.map((tech) => (
+                                    <WrapItem key={tech}>
+                                        <Tag
+                                            size="sm"
+                                            borderRadius="4px"
+                                            variant="solid"
+                                            colorScheme="teal"
+                                        >
+                                            <TagLabel>{tech}</TagLabel>
+                                        </Tag>
+                                    </WrapItem>
+                                ))}
+                            </Wrap>
                         </Box>
-                        <HStack
-                            spacing="1.3rem"
+                        <VStack
+                            spacing="1rem"
                             align="center"
+                            justify="center"
                             display={{ base: 'none', md: 'flex' }}
                             ml="4rem"
                         >
@@ -140,7 +162,7 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                                         whileHover={{ scale: 1.4 }}
                                         whileTap={{ scale: 0.9 }}
                                     >
-                                        <FaExternalLinkAlt size="3rem" />
+                                        <FaExternalLinkAlt size="2.5rem" />
                                     </MotionBox>
                                 </Tooltip>
                             )}
@@ -159,15 +181,15 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                                         whileHover={{ scale: 1.4 }}
                                         whileTap={{ scale: 0.9 }}
                                     >
-                                        <FaGithub size="3rem" />
+                                        <FaGithub size="2.5rem" />
                                     </MotionBox>
                                 </Tooltip>
                             )}
-                        </HStack>
-                        <Flex
-                            justify="space-between"
+                        </VStack>
+                        <HStack
                             width="100%"
                             mt="1rem"
+                            spacing="1rem"
                             display={{ base: 'flex', md: 'none' }}
                         >
                             <Button
@@ -176,7 +198,7 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                                 colorScheme="teal"
                                 rel="noopener noreferrer"
                                 target="_blank"
-                                size="md"
+                                size={buttonSize}
                                 leftIcon={<FaExternalLinkAlt />}
                             >
                                 Live Website
@@ -187,12 +209,12 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                                 colorScheme="teal"
                                 rel="noopener noreferrer"
                                 target="_blank"
-                                size="md"
+                                size={buttonSize}
                                 leftIcon={<FaGithub />}
                             >
                                 Source Code
                             </Button>
-                        </Flex>
+                        </HStack>
                     </Flex>
                     <Box
                         as={Carousel}
