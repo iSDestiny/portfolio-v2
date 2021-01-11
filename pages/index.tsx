@@ -32,7 +32,7 @@ const About = () => {
                 as="main"
                 justify="center"
                 align="center"
-                height="calc(100vh - 80px)"
+                height="calc(100vh - 90px)"
             >
                 <MotionBox
                     as={Flex}

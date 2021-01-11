@@ -16,6 +16,7 @@ import { AnimatePresence, useCycle } from 'framer-motion';
 import FocusLock from 'react-focus-lock';
 import MotionBox from './MotionBox';
 import MobileNav from './MobileNav';
+import Image from 'next/image';
 import { useEffect, useState } from 'react';
 
 const Navbar = () => {
@@ -42,12 +43,23 @@ const Navbar = () => {
                     align="center"
                     maxW="1200px"
                     margin="auto"
-                    padding="0.8rem 1rem"
+                    padding="2.8rem 1rem"
                     height="65px"
                 >
-                    <Box zIndex="4">
-                        <h1>Icon</h1>
-                    </Box>
+                    <NextLink href="/" passHref>
+                        <Link zIndex="4">
+                            <Image
+                                width="200"
+                                height="50"
+                                alt="personal brand logo"
+                                src={
+                                    colorMode === 'light'
+                                        ? '/j-full-logo-transparent-black.png'
+                                        : '/j-full-logo-transparent-white.png'
+                                }
+                            />
+                        </Link>
+                    </NextLink>
                     <HStack as="ul" spacing="1.5rem" listStyleType="none">
                         <Box as="li" display={{ base: 'none', md: 'block' }}>
                             <NextLink href="/" passHref>
