@@ -25,6 +25,7 @@ import {
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
 import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
+import Footer from 'components/Footer';
 
 const ProjectPage = () => {
     const router = useRouter();
@@ -100,6 +101,7 @@ I looked at several applications as references for MarkdownV. Specifically, I to
             <Navbar />
             <Flex
                 as="main"
+                direction="column"
                 width="100%"
                 justify="center"
                 align="center"
@@ -267,6 +269,7 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                     </Box>
                 </MotionBox>
             </Flex>
+            <Footer />
         </>
     );
 };

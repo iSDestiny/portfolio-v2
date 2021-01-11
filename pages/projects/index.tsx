@@ -11,6 +11,7 @@ import Project, { Project as ProjectType } from 'components/Project';
 import { useEffect, useState } from 'react';
 import Navbar from 'components/Navbar';
 import Head from 'next/head';
+import Footer from 'components/Footer';
 
 const Projects = () => {
     const { colorMode } = useColorMode();
@@ -116,6 +117,7 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                     ))}
                 </Grid>
             </Flex>
+            <Footer />
         </>
     );
 };
