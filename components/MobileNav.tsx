@@ -1,15 +1,16 @@
 import NextLink from 'next/link';
 import { Box, Link, useColorMode, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
-import { useEffect } from 'react';
+import { Dispatch, SetStateAction, useEffect } from 'react';
 import MotionBox from './MotionBox';
+import { AnimatePresence } from 'framer-motion';
 
 interface MobileNavProps {
     isOpen: boolean;
-    toggleIsOpen: any;
+    setIsOpen: Dispatch<SetStateAction<boolean>>;
 }
 
-const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
+const MobileNav = ({ isOpen, setIsOpen }: MobileNavProps) => {
     const router = useRouter();
     const { colorMode } = useColorMode();
 
@@ -32,15 +33,20 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
         }
     };
 
+    const handleKeyDown = (event: KeyboardEvent) => {
+        if (event.key === 'Escape') setIsOpen(false);
+    };
+
     useEffect(() => {
         document.body.style.overflowY = isOpen ? 'hidden' : 'auto';
+        document.addEventListener('keydown', handleKeyDown);
     }, [isOpen]);
 
     return (
         <MotionBox
             display={{ base: 'block', md: 'none' }}
-            transform="translateY(-100%)"
-            initial={false}
+            key="menu"
+            initial="closed"
             animate={isOpen ? 'open' : 'closed'}
             as="nav"
             overflow="hidden"
@@ -65,6 +71,7 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
                 <Box as="li">
                     <NextLink href="/" passHref>
                         <Link
+                            onClick={() => setIsOpen(false)}
                             fontSize="2rem"
                             borderBottom={
                                 router.pathname === '/'
@@ -83,6 +90,7 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
                 <Box as="li">
                     <NextLink href="/projects" passHref>
                         <Link
+                            onClick={() => setIsOpen(false)}
                             fontSize="2rem"
                             borderBottom={
                                 router.pathname === '/projects'
@@ -100,7 +108,7 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
                 </Box>
                 <Box as="li">
                     <Link
-                        onClick={toggleIsOpen}
+                        onClick={() => setIsOpen(false)}
                         fontSize="2rem"
                         href="mailto:jasonbugallon@gmail.com"
                         rel="noopener noreferrer"
@@ -115,7 +123,7 @@ const MobileNav = ({ isOpen, toggleIsOpen }: MobileNavProps) => {
                 </Box>
                 <Box as="li">
                     <Link
-                        onClick={toggleIsOpen}
+                        onClick={() => setIsOpen(false)}
                         fontSize="2rem"
                         href="/resume.pdf"
                         target="_blank"

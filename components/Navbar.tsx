@@ -7,22 +7,34 @@ import {
     Link,
     IconButton,
     useColorMode,
-    Tooltip
+    Tooltip,
+    Portal
 } from '@chakra-ui/react';
 import { FaSun, FaMoon } from 'react-icons/fa';
 import MenuToggle from './MenuToggle';
-import { useCycle } from 'framer-motion';
+import { AnimatePresence, useCycle } from 'framer-motion';
+import FocusLock from 'react-focus-lock';
 import MotionBox from './MotionBox';
 import MobileNav from './MobileNav';
+import { useState } from 'react';
 
 const Navbar = () => {
-    const [isMenuOpen, toggleMenuOpen] = useCycle(false, true);
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
     const { colorMode, toggleColorMode } = useColorMode();
     const router = useRouter();
 
     return (
-        <>
-            <MobileNav isOpen={isMenuOpen} toggleIsOpen={toggleMenuOpen} />
+        <FocusLock disabled={!isMenuOpen}>
+            <AnimatePresence>
+                {isMenuOpen && (
+                    <>
+                        <MobileNav
+                            isOpen={isMenuOpen}
+                            setIsOpen={setIsMenuOpen}
+                        />
+                    </>
+                )}
+            </AnimatePresence>
             <Box as="header">
                 <Flex
                     justify="space-between"
@@ -122,12 +134,14 @@ const Navbar = () => {
                             animate={isMenuOpen ? 'open' : 'closed'}
                             display={{ base: 'block', md: 'none' }}
                         >
-                            <MenuToggle toggle={() => toggleMenuOpen()} />
+                            <MenuToggle
+                                toggle={() => setIsMenuOpen((prev) => !prev)}
+                            />
                         </MotionBox>
                     </HStack>
                 </Flex>
             </Box>
-        </>
+        </FocusLock>
     );
 };
 
