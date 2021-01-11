@@ -16,7 +16,7 @@ import { AnimatePresence, useCycle } from 'framer-motion';
 import FocusLock from 'react-focus-lock';
 import MotionBox from './MotionBox';
 import MobileNav from './MobileNav';
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -37,6 +37,7 @@ const Navbar = () => {
             </AnimatePresence>
             <Box as="header">
                 <Flex
+                    as="nav"
                     justify="space-between"
                     align="center"
                     maxW="1200px"
