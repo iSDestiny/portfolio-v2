@@ -1,6 +1,6 @@
 import Navbar from 'components/Navbar';
 import { Project } from 'components/Project';
-import { useEffect, useState } from 'react';
+import { KeyboardEvent, useEffect, useState } from 'react';
 import { useRouter } from 'next/router';
 import Head from 'next/head';
 import MotionBox from 'components/MotionBox';
@@ -24,10 +24,11 @@ import {
 } from '@chakra-ui/react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
-import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
+import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
 
 const ProjectPage = () => {
     const router = useRouter();
+    const { openLightbox, closeLightbox } = useLightbox();
     const buttonSize = useBreakpointValue({ base: 'sm', sm: 'md' });
     const { colorMode } = useColorMode();
     const { projectId } = router.query;
@@ -84,6 +85,10 @@ I looked at several applications as references for MarkdownV. Specifically, I to
             scrollbars: { autoHide: 'scroll' }
         });
     }, [colorMode]);
+
+    const handleCarouselKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
+        if (event.key === 'Enter') openLightbox();
+    };
 
     return (
         <>
@@ -225,27 +230,35 @@ I looked at several applications as references for MarkdownV. Specifically, I to
                             </Button>
                         </HStack>
                     </Flex>
-                    <Box
-                        as={Carousel}
-                        boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
-                        my="1rem"
-                        _focus={{
-                            outline: '4px solid teal'
-                        }}
-                        showStatus={false}
-                        showThumbs={false}
-                        swipeable
-                        infiniteLoop
-                        emulateTouch
-                        useKeyboardArrows
-                        dynamicHeight
-                    >
-                        {project?.images.map((image, index) => (
-                            <Box key={index}>
-                                <img src={image} />
-                            </Box>
-                        ))}
-                    </Box>
+                    <SRLWrapper>
+                        <Box
+                            as={Carousel}
+                            boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
+                            my="1rem"
+                            _focus={{
+                                outline: '4px solid teal'
+                            }}
+                            id="hello"
+                            showStatus={false}
+                            showThumbs={false}
+                            cursor="pointer"
+                            swipeable
+                            emulateTouch
+                            useKeyboardArrows
+                            dynamicHeight
+                        >
+                            {project?.images.map((image, index) => (
+                                <Box
+                                    key={index}
+                                    tabIndex={0}
+                                    onClick={() => openLightbox(index)}
+                                    onKeyDown={(e) => handleCarouselKeyDown(e)}
+                                >
+                                    <img src={image} />
+                                </Box>
+                            ))}
+                        </Box>
+                    </SRLWrapper>
                     <Box as="main" mt="1rem">
                         <Heading as="h2" size="lg" mb="0.8rem">
                             About this project

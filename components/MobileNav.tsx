@@ -3,7 +3,6 @@ import { Box, Link, useColorMode, VStack } from '@chakra-ui/react';
 import { useRouter } from 'next/router';
 import { Dispatch, SetStateAction, useEffect } from 'react';
 import MotionBox from './MotionBox';
-import { AnimatePresence } from 'framer-motion';
 
 interface MobileNavProps {
     isOpen: boolean;
