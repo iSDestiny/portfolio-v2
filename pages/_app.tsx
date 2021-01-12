@@ -5,18 +5,16 @@ import { AnimatePresence } from 'framer-motion';
 import 'overlayscrollbars/css/OverlayScrollbars.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
-import SimpleReactLightbox from 'simple-react-lightbox';
+import 'react-image-lightbox/style.css';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
     return (
         <>
             <ChakraProvider>
                 <OverlayScrollbarsComponent>
-                    <SimpleReactLightbox>
-                        <AnimatePresence exitBeforeEnter>
-                            <Component {...pageProps} key={router.route} />
-                        </AnimatePresence>
-                    </SimpleReactLightbox>
+                    <AnimatePresence exitBeforeEnter>
+                        <Component {...pageProps} key={router.route} />
+                    </AnimatePresence>
                 </OverlayScrollbarsComponent>
             </ChakraProvider>
         </>

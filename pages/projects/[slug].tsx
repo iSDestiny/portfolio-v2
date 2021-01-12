@@ -10,6 +10,7 @@ import {
     UnorderedList,
     useColorMode
 } from '@chakra-ui/react';
+import mod from 'utils/mod';
 import Image from 'next/image';
 import Footer from 'components/Footer';
 import MotionBox from 'components/MotionBox';
@@ -23,9 +24,9 @@ import hydrate from 'next-mdx-remote/hydrate';
 import renderToString from 'next-mdx-remote/render-to-string';
 import Head from 'next/head';
 import path from 'path';
-import { KeyboardEvent } from 'react';
+import { KeyboardEvent, useState } from 'react';
 import { Carousel as RRCarousel } from 'react-responsive-carousel';
-import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
+import Lightbox from 'react-image-lightbox';
 import { projectFilePaths, PROJECTS_PATH } from 'utils/mdxUtils';
 
 interface ProjectPageProps {
@@ -113,17 +114,38 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
         stack,
         live
     } = frontMatter;
-    const { openLightbox } = useLightbox();
+    const [isLightboxOpen, setIsLightboxOpen] = useState(false);
+    const [lightboxIndex, setLightboxIndex] = useState(0);
     const content = hydrate(source, { components });
 
+    const openLightbox = (index: number) => {
+        setLightboxIndex(index);
+        setIsLightboxOpen(true);
+    };
+
     const handleCarouselKeyDown = (event: KeyboardEvent<HTMLDivElement>) => {
-        if (event.key === 'Enter') openLightbox();
+        if (event.key === 'Enter') openLightbox(0);
     };
 
     useCustomScrollbar();
 
     return (
         <>
+            {isLightboxOpen && (
+                <Lightbox
+                    mainSrc={images[lightboxIndex].src}
+                    imageCaption={images[lightboxIndex].alt}
+                    nextSrc={images[mod(lightboxIndex + 1, images.length)].src}
+                    prevSrc={images[mod(lightboxIndex - 1, images.length)].src}
+                    onCloseRequest={() => setIsLightboxOpen(false)}
+                    onMovePrevRequest={() =>
+                        setLightboxIndex((prev) => mod(prev - 1, images.length))
+                    }
+                    onMoveNextRequest={() =>
+                        setLightboxIndex((prev) => mod(prev + 1, images.length))
+                    }
+                />
+            )}
             <Head>
                 <title>
                     {`${title} `} | Jason Bugallon's Web Developer Portfolio
@@ -159,38 +181,36 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                         stack={stack}
                         live={live}
                     />
-                    <SRLWrapper>
-                        <Carousel
-                            boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
-                            my="1rem"
-                            _focus={{
-                                outline: '4px solid teal'
-                            }}
-                            cursor="pointer"
-                            showStatus={false}
-                            showThumbs={false}
-                            swipeable
-                            emulateTouch
-                            useKeyboardArrows
-                            dynamicHeight
-                        >
-                            {images.map(({ src, alt }, index) => (
-                                <Box
-                                    key={index}
-                                    tabIndex={0}
-                                    onClick={() => openLightbox(index)}
-                                    onKeyDown={(e) => handleCarouselKeyDown(e)}
-                                >
-                                    <Image
-                                        src={src}
-                                        alt={alt}
-                                        width="1000px"
-                                        height="600px"
-                                    />
-                                </Box>
-                            ))}
-                        </Carousel>
-                    </SRLWrapper>
+                    <Carousel
+                        boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
+                        my="1rem"
+                        _focus={{
+                            outline: '4px solid teal'
+                        }}
+                        cursor="pointer"
+                        showStatus={false}
+                        showThumbs={false}
+                        swipeable
+                        emulateTouch
+                        useKeyboardArrows
+                        dynamicHeight
+                    >
+                        {images.map(({ src, alt }, index) => (
+                            <Box
+                                key={index}
+                                tabIndex={0}
+                                onClick={() => openLightbox(index)}
+                                onKeyDown={(e) => handleCarouselKeyDown(e)}
+                            >
+                                <Image
+                                    src={src}
+                                    alt={alt}
+                                    width="1000px"
+                                    height="600px"
+                                />
+                            </Box>
+                        ))}
+                    </Carousel>
                     <Box as="main" mt="1rem">
                         <Box as="main" mt="1rem">
                             {content}
