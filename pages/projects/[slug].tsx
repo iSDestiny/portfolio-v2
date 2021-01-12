@@ -33,7 +33,7 @@ interface ProjectPageProps {
         title: string;
         summary: string;
         source: string;
-        images: string[];
+        images: { src: string; alt: string }[];
         stack: string[];
         live?: string;
     };
@@ -125,8 +125,9 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
         <>
             <Head>
                 <title>
-                    Jason Bugallon's Web Developer Portfolio | {title}
+                    {`${title} `} | Jason Bugallon's Web Developer Portfolio
                 </title>
+                <meta name="description" key="description" content={summary} />
             </Head>
             <Navbar />
             <Flex
@@ -172,14 +173,14 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                             useKeyboardArrows
                             dynamicHeight
                         >
-                            {images.map((image, index) => (
+                            {images.map(({ src, alt }, index) => (
                                 <Box
                                     key={index}
                                     tabIndex={0}
                                     onClick={() => openLightbox(index)}
                                     onKeyDown={(e) => handleCarouselKeyDown(e)}
                                 >
-                                    <img src={image} />
+                                    <img src={src} alt={alt} />
                                 </Box>
                             ))}
                         </Carousel>

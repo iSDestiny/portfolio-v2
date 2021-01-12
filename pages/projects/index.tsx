@@ -22,7 +22,7 @@ const Projects = ({ projects }: ProjectsProps) => {
         <>
             <Head>
                 <title key="title">
-                    Jason Bugallon's Web Developer Portfolio | Projects
+                    Projects | Jason Bugallon's Web Developer Portfolio
                 </title>
                 <meta
                     name="description"

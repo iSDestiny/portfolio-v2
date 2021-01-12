@@ -23,7 +23,7 @@ export interface Project {
     rank: number;
     summary: string;
     source: string;
-    images: string[];
+    images: { src: string; alt: string }[];
     stack: string[];
     live?: string;
 }
@@ -115,7 +115,7 @@ const Project = ({
                 >
                     <Box
                         aria-label={`${title} project`}
-                        bg={`url(${images[0]}) no-repeat`}
+                        bg={`url(${images[0].src}) no-repeat`}
                         bgSize="100% 100%"
                         bgPos="center"
                         width="100%"

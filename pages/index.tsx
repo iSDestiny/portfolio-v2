@@ -12,7 +12,7 @@ const About = () => {
     return (
         <>
             <Head>
-                <title>Jason Bugallon's Web Developer Portfolio | About</title>
+                <title>Jason Bugallon's Web Developer Portfolio</title>
                 <meta
                     name="description"
                     key="description"
