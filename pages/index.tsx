@@ -19,6 +19,13 @@ const About = () => {
                     content="Jason Bugallon's web developer portfolio"
                 />
             </Head>
+            <style jsx global>
+                {`
+                    body {
+                        overflow: hidden !important;
+                    }
+                `}
+            </style>
             <Navbar />
             <Flex
                 as="main"
