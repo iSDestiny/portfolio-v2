@@ -116,8 +116,6 @@ const Project = ({
                 >
                     <Box
                         aria-label={`${title} project`}
-                        bg={`url(${images[0].src}) no-repeat`}
-                        bgSize="100% 100%"
                         bgPos="center"
                         width="100%"
                         height="100%"

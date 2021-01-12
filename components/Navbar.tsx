@@ -48,6 +48,7 @@ const Navbar = () => {
                     <NextLink href="/" passHref>
                         <Link zIndex="4" onClick={() => setIsMenuOpen(false)}>
                             <Image
+                                priority
                                 width="220"
                                 height="50"
                                 alt="personal brand logo"
