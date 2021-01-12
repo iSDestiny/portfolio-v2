@@ -11,6 +11,7 @@ import {
     Tooltip,
     useBreakpointValue
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import { useRouter } from 'next/router';
 import NextLink from 'next/link';
 import { KeyboardEvent, MouseEvent, useState } from 'react';
@@ -124,7 +125,9 @@ const Project = ({
                         align="center"
                         cursor="pointer"
                         boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
-                    />
+                    >
+                        <Image src={images[0].src} layout="fill" />
+                    </Box>
                 </Link>
             </NextLink>
             <MotionBox

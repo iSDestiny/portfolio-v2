@@ -10,6 +10,7 @@ import {
     UnorderedList,
     useColorMode
 } from '@chakra-ui/react';
+import Image from 'next/image';
 import Footer from 'components/Footer';
 import MotionBox from 'components/MotionBox';
 import Navbar from 'components/Navbar';
@@ -180,7 +181,12 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                                     onClick={() => openLightbox(index)}
                                     onKeyDown={(e) => handleCarouselKeyDown(e)}
                                 >
-                                    <img src={src} alt={alt} />
+                                    <Image
+                                        src={src}
+                                        alt={alt}
+                                        width="1000px"
+                                        height="600px"
+                                    />
                                 </Box>
                             ))}
                         </Carousel>
