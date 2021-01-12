@@ -1,0 +1,24 @@
+---
+title: Fabflix
+summary: An IMDB-like movie directory website
+source: 'https://github.com/iSDestiny/Fabflix'
+live: 'https://github.com/iSDestiny/Fabflix'
+stack: ['Javascript', 'jQuery', 'CSS', 'Java', 'HTML', 'Java', 'Tomcat', 'MySQL']
+images: ['https://www.jasonbugallon.com/assets/images/fabflix.png']
+---
+
+## About this project
+
+Fabflix is a IMDb/Netflix-like movie ecommerce full stack web application where a user would browse for movies and purchase the ones they want. This was a project done with one other person, Kulraj Dhaliwal. This was our very first large web application where there was a seperate frontend and backend. I, Jason Bugallon, did all of the frontend and some backend while Kulraj did the rest of the backend implementation. It supported user authentication (only login, registering was not implemented) with reCaptcha, various types of searching such as searching by author name, title, genre, year or any combination of those. A user could also browse by a specific category if they don't have a specific movie they want to search for. It supported user sessions so users wouldn't have to keep logging in and allowed users to add movies to their shopping list and checkout using their payment information. The web app doesn't actually support transactions, it only has a form where a user can input their payment information and will verify/validate it, we decided not to support that since we aren't actually selling movies for real but if we did we would have used Stripe. I also created a small android app which had a small subset of the frontend for Fabflix in order to test whether our backend worked well with mobile, which it did. All the app can do is search for movies by title, display the choices, and view the details of a specific movie that was selected.
+
+## Application Technology Stack
+
+For the frontend, Fabflix was built in pure HTML, CSS, and Javascript (with JQuery). On the other hand, the backend was built using Apache Tomcat(Java), while using mySQL as our database. We utilized React Native for the small android app that had a small subset of the frontend features.
+
+## Deployment and Scaling
+
+Fabflix was hosted originally on a single AWS EC2 instance which ran on a Ubuntu Linux operating system. To scale the system, we utilized two more EC2 instances, which totaled to a three instances. The first instance would be an Apache Load Balancer which would handle the incoming traffic and redirect it to the other two EC2 instances which would both be hosting Fabflix. By having it set up this way, the traffic will be divided between two instances to ease the load if there were a lot of people trying to access the site. This way Fabflix's performance would be much better under high traffic compared to just using a single instance. These two instances utilized a Master and Slave mySQL setup. The two instances would be able to read from either of the databases but would only be able to write to the master instance. The writes to the master mySQL database would also occur on the slave database. In order to test whether our scaling of Fabflix was effective, we utilized a tool called Apache JMeter in order to simulate high traffic onto our system. From this tool we found out that our setup was indeed effective as requests to the three instance setup was much faster compared to the one instance setup during high traffic.
+
+## Final thoughts
+
+Fabflix was our very first web application so it was not very optimized and could be quite slow, especially in loading images. If I were to redo this project I would definitely use a framework such as React or Angular. I would also not have chosen Apache Tomcat for the backend and used something like Node.js(Express) or Python(Django or Flask).

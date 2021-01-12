@@ -19,7 +19,21 @@ import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import MotionBox from './MotionBox';
 import { Project } from './Project';
 
-const ProjectHeader = ({ project }: { project: Project }) => {
+interface ProjectHeaderProps {
+    title: string;
+    summary: string;
+    source: string;
+    stack: string[];
+    live?: string;
+}
+
+const ProjectHeader = ({
+    title,
+    summary,
+    source,
+    live,
+    stack
+}: ProjectHeaderProps) => {
     const buttonSize = useBreakpointValue({ base: 'sm', sm: 'md' });
     const { colorMode } = useColorMode();
 
@@ -33,7 +47,7 @@ const ProjectHeader = ({ project }: { project: Project }) => {
         >
             <Box>
                 <Heading as="h1" size="xl">
-                    {project?.name}
+                    {title}
                 </Heading>
                 <Heading
                     as="h2"
@@ -42,10 +56,10 @@ const ProjectHeader = ({ project }: { project: Project }) => {
                     role="doc-subtitle"
                     color={colorMode === 'light' ? 'teal.600' : 'teal.400'}
                 >
-                    {project?.shortDescription}
+                    {summary}
                 </Heading>
                 <Wrap spacing="0.7rem" width="100%" mt="1rem">
-                    {project?.stack.map((tech) => (
+                    {stack.map((tech) => (
                         <WrapItem key={tech}>
                             <Tag
                                 size="sm"
@@ -66,12 +80,12 @@ const ProjectHeader = ({ project }: { project: Project }) => {
                 display={{ base: 'none', md: 'flex' }}
                 ml="4rem"
             >
-                {project?.live && (
+                {live && (
                     <Tooltip label="Live website">
                         <MotionBox
                             as={Link}
-                            aria-label={`${name} live website`}
-                            href={project?.live}
+                            aria-label={`${title} live website`}
+                            href={live}
                             rel="noopener noreferrer"
                             target="_blank"
                             onClick={(e) => e.stopPropagation()}
@@ -82,22 +96,20 @@ const ProjectHeader = ({ project }: { project: Project }) => {
                         </MotionBox>
                     </Tooltip>
                 )}
-                {project?.source && (
-                    <Tooltip label="Source code" colorScheme="white">
-                        <MotionBox
-                            as={Link}
-                            onClick={(e) => e.stopPropagation()}
-                            aria-label={`${name} source code`}
-                            href={project?.source}
-                            rel="noopener noreferrer"
-                            target="_blank"
-                            whileHover={{ scale: 1.4 }}
-                            whileTap={{ scale: 0.9 }}
-                        >
-                            <FaGithub size="2.5rem" />
-                        </MotionBox>
-                    </Tooltip>
-                )}
+                <Tooltip label="Source code" colorScheme="white">
+                    <MotionBox
+                        as={Link}
+                        onClick={(e) => e.stopPropagation()}
+                        aria-label={`${title} source code`}
+                        href={source}
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        whileHover={{ scale: 1.4 }}
+                        whileTap={{ scale: 0.9 }}
+                    >
+                        <FaGithub size="2.5rem" />
+                    </MotionBox>
+                </Tooltip>
             </VStack>
             <HStack
                 width="100%"
@@ -105,20 +117,22 @@ const ProjectHeader = ({ project }: { project: Project }) => {
                 spacing="1rem"
                 display={{ base: 'flex', md: 'none' }}
             >
+                {live && (
+                    <Button
+                        as="a"
+                        href={live}
+                        colorScheme="teal"
+                        rel="noopener noreferrer"
+                        target="_blank"
+                        size={buttonSize}
+                        leftIcon={<FaExternalLinkAlt />}
+                    >
+                        Live Website
+                    </Button>
+                )}
                 <Button
                     as="a"
-                    href={project?.live}
-                    colorScheme="teal"
-                    rel="noopener noreferrer"
-                    target="_blank"
-                    size={buttonSize}
-                    leftIcon={<FaExternalLinkAlt />}
-                >
-                    Live Website
-                </Button>
-                <Button
-                    as="a"
-                    href={project?.source}
+                    href={source}
                     colorScheme="teal"
                     rel="noopener noreferrer"
                     target="_blank"
