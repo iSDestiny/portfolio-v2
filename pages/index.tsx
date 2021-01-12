@@ -10,7 +10,7 @@ const About = () => {
     const router = useRouter();
 
     return (
-        <>
+        <Box position="fixed" overflow="hidden" width="100%" height="100%">
             <Head>
                 <title>Jason Bugallon's Web Developer Portfolio</title>
                 <meta
@@ -21,6 +21,7 @@ const About = () => {
             </Head>
             <style jsx global>
                 {`
+                    html,
                     body {
                         overflow: hidden !important;
                     }
@@ -85,7 +86,7 @@ const About = () => {
                     <Socials />
                 </MotionBox>
             </Flex>
-        </>
+        </Box>
     );
 };
 

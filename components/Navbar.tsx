@@ -43,7 +43,7 @@ const Navbar = () => {
                     maxW="1200px"
                     margin="auto"
                     padding="2.8rem 1rem"
-                    height="65px"
+                    height="90px"
                 >
                     <NextLink href="/" passHref>
                         <Link zIndex="4" onClick={() => setIsMenuOpen(false)}>
