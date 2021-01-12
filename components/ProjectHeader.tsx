@@ -17,7 +17,6 @@ import {
 import React from 'react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import MotionBox from './MotionBox';
-import { Project } from './Project';
 
 interface ProjectHeaderProps {
     title: string;

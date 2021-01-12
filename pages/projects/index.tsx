@@ -1,23 +1,15 @@
-import { projectFilePaths, PROJECTS_PATH } from 'utils/mdxUtils';
-import path from 'path';
+import { Flex, Grid, GridItem, Heading } from '@chakra-ui/react';
+import Footer from 'components/Footer';
+import MotionBox from 'components/MotionBox';
+import Navbar from 'components/Navbar';
+import Project, { Project as ProjectType } from 'components/Project';
 import fs from 'fs';
 import matter from 'gray-matter';
-import {
-    Box,
-    Flex,
-    Grid,
-    GridItem,
-    Heading,
-    useColorMode
-} from '@chakra-ui/react';
-import MotionBox from 'components/MotionBox';
-import Project, { Project as ProjectType } from 'components/Project';
-import { useEffect, useState } from 'react';
-import Navbar from 'components/Navbar';
-import Head from 'next/head';
-import Footer from 'components/Footer';
 import useCustomScrollbar from 'hooks/useCustomScrollbar';
 import { GetStaticProps } from 'next';
+import Head from 'next/head';
+import path from 'path';
+import { projectFilePaths, PROJECTS_PATH } from 'utils/mdxUtils';
 
 interface ProjectsProps {
     projects: ProjectType[];

@@ -1,4 +1,4 @@
-import { Box, Link } from '@chakra-ui/react';
+import { Box } from '@chakra-ui/react';
 import hydrate from 'next-mdx-remote/hydrate';
 
 const components = {

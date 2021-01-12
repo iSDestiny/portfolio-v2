@@ -1,23 +1,22 @@
-import NextLink from 'next/link';
-import { useRouter } from 'next/router';
 import {
+    Box,
     Flex,
     HStack,
-    Box,
-    Link,
     IconButton,
-    useColorMode,
+    Link,
     Tooltip,
-    Portal
+    useColorMode
 } from '@chakra-ui/react';
-import { FaSun, FaMoon } from 'react-icons/fa';
-import MenuToggle from './MenuToggle';
-import { AnimatePresence, useCycle } from 'framer-motion';
-import FocusLock from 'react-focus-lock';
-import MotionBox from './MotionBox';
-import MobileNav from './MobileNav';
+import { AnimatePresence } from 'framer-motion';
 import Image from 'next/image';
-import { useEffect, useState } from 'react';
+import NextLink from 'next/link';
+import { useRouter } from 'next/router';
+import { useState } from 'react';
+import FocusLock from 'react-focus-lock';
+import { FaMoon, FaSun } from 'react-icons/fa';
+import MenuToggle from './MenuToggle';
+import MobileNav from './MobileNav';
+import MotionBox from './MotionBox';
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);

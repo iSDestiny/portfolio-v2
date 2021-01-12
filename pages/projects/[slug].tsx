@@ -1,42 +1,31 @@
-import Navbar from 'components/Navbar';
-import { projectFilePaths, PROJECTS_PATH } from 'utils/mdxUtils';
-import path from 'path';
-import fs from 'fs';
-import matter from 'gray-matter';
-import renderToString from 'next-mdx-remote/render-to-string';
-import hydrate from 'next-mdx-remote/hydrate';
-import { KeyboardEvent, useEffect, useState } from 'react';
-import Head from 'next/head';
-import MotionBox from 'components/MotionBox';
 import {
     Box,
+    chakra,
+    Code,
     Flex,
     Heading,
-    Stack,
-    Text,
     Link,
-    Tooltip,
-    useColorMode,
-    HStack,
-    Button,
-    Wrap,
-    Tag,
-    TagLabel,
-    WrapItem,
-    VStack,
-    useBreakpointValue,
-    UnorderedList,
     ListItem,
-    Code
+    Text,
+    UnorderedList,
+    useColorMode
 } from '@chakra-ui/react';
-import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
-import { Carousel } from 'react-responsive-carousel';
-import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
 import Footer from 'components/Footer';
+import MotionBox from 'components/MotionBox';
+import Navbar from 'components/Navbar';
 import ProjectHeader from 'components/ProjectHeader';
+import fs from 'fs';
+import matter from 'gray-matter';
 import useCustomScrollbar from 'hooks/useCustomScrollbar';
-import ProjectBody from 'components/ProjectBody';
 import { GetStaticPaths, GetStaticProps } from 'next';
+import hydrate from 'next-mdx-remote/hydrate';
+import renderToString from 'next-mdx-remote/render-to-string';
+import Head from 'next/head';
+import path from 'path';
+import { KeyboardEvent } from 'react';
+import { Carousel as RRCarousel } from 'react-responsive-carousel';
+import { SRLWrapper, useLightbox } from 'simple-react-lightbox';
+import { projectFilePaths, PROJECTS_PATH } from 'utils/mdxUtils';
 
 interface ProjectPageProps {
     source: string;
@@ -54,6 +43,8 @@ interface mdxNodeProps {
     children: any;
     href?: string;
 }
+
+const Carousel = chakra<any>(RRCarousel);
 
 const components = {
     inlineCode: ({ children }) => <Code>{children}</Code>,
@@ -167,17 +158,15 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                         live={live}
                     />
                     <SRLWrapper>
-                        <Box
-                            as={Carousel}
+                        <Carousel
                             boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
                             my="1rem"
                             _focus={{
                                 outline: '4px solid teal'
                             }}
-                            id="hello"
+                            cursor="pointer"
                             showStatus={false}
                             showThumbs={false}
-                            cursor="pointer"
                             swipeable
                             emulateTouch
                             useKeyboardArrows
@@ -193,7 +182,7 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                                     <img src={image} />
                                 </Box>
                             ))}
-                        </Box>
+                        </Carousel>
                     </SRLWrapper>
                     <Box as="main" mt="1rem">
                         <Box as="main" mt="1rem">
