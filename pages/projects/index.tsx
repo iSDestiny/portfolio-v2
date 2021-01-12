@@ -85,12 +85,14 @@ const Projects = ({ projects }: ProjectsProps) => {
 export default Projects;
 
 export const getStaticProps: GetStaticProps = async () => {
-    const projects = projectFilePaths.map((pathname) => {
+    const projects: ProjectType[] = projectFilePaths.map((pathname) => {
         const route = pathname.replace(/\.mdx?$/, '');
         const source = fs.readFileSync(path.join(PROJECTS_PATH, pathname));
-        const { data } = matter(source);
+        const { data } = matter(source) as any;
         return { ...data, route };
     });
+
+    projects.sort((a, b) => a.rank - b.rank);
 
     return {
         props: {

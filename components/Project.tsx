@@ -20,6 +20,7 @@ import MotionBox from './MotionBox';
 export interface Project {
     route: string;
     title: string;
+    rank: number;
     summary: string;
     source: string;
     images: string[];
