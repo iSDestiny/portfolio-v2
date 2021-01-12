@@ -12,16 +12,9 @@ import { useEffect, useState } from 'react';
 import Navbar from 'components/Navbar';
 import Head from 'next/head';
 import Footer from 'components/Footer';
+import useCustomScrollbar from 'hooks/useCustomScrollbar';
 
 const Projects = () => {
-    const { colorMode } = useColorMode();
-    useEffect(() => {
-        OverlayScrollbars(document.querySelectorAll('body'), {
-            className:
-                colorMode === 'light' ? 'os-theme-dark' : 'os-theme-light',
-            scrollbars: { autoHide: 'scroll' }
-        });
-    }, [colorMode]);
     const [projects, setProjects] = useState<ProjectType[]>([
         {
             id: 'asdf123',
@@ -65,6 +58,8 @@ I looked at several applications as references for MarkdownV. Specifically, I to
             live: 'https://markdown-v.vercel.app/'
         }
     ]);
+
+    useCustomScrollbar();
 
     return (
         <>
