@@ -124,7 +124,11 @@ const Project = ({
                         cursor="pointer"
                         boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
                     >
-                        <Image src={images[0].src} layout="fill" />
+                        <Image
+                            src={images[0].src}
+                            layout="fill"
+                            objectFit="fill"
+                        />
                     </Box>
                 </Link>
             </NextLink>
