@@ -40,7 +40,7 @@ notes so here I am.
 
 I looked at several applications as references for MarkdownV. Specifically, I took vscode's material ui
 palenight theme and tried my best to replicate it with MarkdownV. I also used [Notable](https://notable.app/), another markdown
-notetaking application, and [Evernote](https://evernote.com/), a rich text note taking application, as references for the design
+notetaking application, and [Evernote](https://evernote.com/), a rich text note taking application, as references for most of the design
 of my UI.
 
 ## Features
@@ -77,7 +77,50 @@ MarkdownV allows you to organize your notes with the use of case insensitive tag
 
 You can hide the side menus by utilizing full screen mode. During this mode only your editor, top menu, and preview screen (if enabled) will be shown. To navigate to other notes in fullscreen mode, the global search functionality (Ctrl+P) will be very useful here
 
-## Tech Stack and Libraries
+## Reflection
+
+This project took me about a month to finally get an MVP out that I was satisfied with. I consider this to be my best project by far
+and believe it really represent everything I learned in my web development journey. This project was the first time I have
+used typescript with React and Node and also the first time I used Next.js. These technologies were not the only ones that I have
+used for the first time for this project but since they weren't specific React libraries I wanted to highlight them. The other
+notable technologies I used for the first time were: React Query, React Hook Form, Redux, and Passport.js. This was a project
+where I wanted to experiment with new technologies so that was why there were so many firsts in that list.
+
+### Typescript
+
+After using typescript for this project, it is now my preferred way to develop with React and Node. The quality of life that typescript
+offers just make the developer experience so much better. I really like how typescript lets you know whether you are missing some parameters
+on your component or if you are using the wrong type right in your editor. However, the number one thing I like about typescript is the
+improved autocompletion/intellisense.
+
+### Next.js and Next.js API Routes
+
+Next.js will definitely be how I develop with React from now on, the standard CRA just doesn't make sense for my projects anymore when
+Next.js can do everything it does but better. Unlike CRA, Next.js has routing built in which is a lot more convenient than `react-router`.
+Next.js also offers per-page server side rendering and static site generation where CRA only does client side rendering which is terrible
+for SEO. Setting up typescript with Next.js is also built in, you don't even have to write your own tsconfig, all you have to do is convert
+your js files to ts or tsx and it will set it all up for you after your first `yarn|npm run dev`.
+
+<br />
+
+While I really loved the developer experience of Next.js over CRA I can't say the same for Next API Routes as my backend over express. Initially,
+I did not utilize `next-connect` so I had to write weird wrapper functions for my middlewares rather than being able to just do
+something like `app.use(middleware)`. I actually wrote my whole backend like this before I finally found out about `next-connect`.
+`next-connect` lets you use middleware like how you would use it in express, however even with this I still think the developer
+experience with express is better because with Next API Routes you have to use seperate pages for each endpoint. Hover, one big advantage
+that Next API Routes over a seperate express server was the ease in deployment. By using api routes you won't have to upkeep a seperate server
+for your backend, when you deploy your Next web app on vercel it will automatically turn your api routes to serverless functions for you
+without any extra configuration, this saved me a lot of time.
+
+### Redux and React Query
+
+In MarkdownV I only used Redux for the client state, that means I didn't use it to store async data, that I would make fetch requests
+to perform CRUD operations on. Instead I utilized React Query to handle this data, also known as my server state. React Query was a joy to use.
+It was very convenient, offering things like isLoading, onError. It did many things for you that you would have to had manually do if you used something like Redux to handle your server state.
+I could probably have used a light alternative rather than Redux but since I have never used Redux I wanted to use it just for the sake of learning and
+also because Redux toolkit made it very easy to setup without having to write too much boilerplate code.
+
+## Tech Stack and Libraries (Not all are listed)
 
 ### Frontend
 

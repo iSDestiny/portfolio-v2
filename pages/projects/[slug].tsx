@@ -26,7 +26,8 @@ import {
     VStack,
     useBreakpointValue,
     UnorderedList,
-    ListItem
+    ListItem,
+    Code
 } from '@chakra-ui/react';
 import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import { Carousel } from 'react-responsive-carousel';
@@ -55,6 +56,7 @@ interface mdxNodeProps {
 }
 
 const components = {
+    inlineCode: ({ children }) => <Code>{children}</Code>,
     a: ({ children, href }: mdxNodeProps) => {
         const { colorMode } = useColorMode();
 
