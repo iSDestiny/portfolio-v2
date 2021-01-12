@@ -18,13 +18,12 @@ import { FaExternalLinkAlt, FaGithub } from 'react-icons/fa';
 import MotionBox from './MotionBox';
 
 export interface Project {
-    id: string;
-    name: string;
-    shortDescription: string;
-    longDescription: string;
+    route: string;
+    title: string;
+    summary: string;
+    source: string;
+    images: string[];
     stack: string[];
-    images?: string[];
-    source?: string;
     live?: string;
 }
 
@@ -33,7 +32,7 @@ interface ProjectProps {
 }
 
 const Project = ({
-    project: { id, name, shortDescription, stack, images, source, live }
+    project: { route, title, summary, source, live, images, stack }
 }: ProjectProps) => {
     const router = useRouter();
     const [isOverlayOpen, setisOverlayOpen] = useState(false);
@@ -62,7 +61,7 @@ const Project = ({
         event: MouseEvent<HTMLElement, globalThis.MouseEvent>
     ) => {
         event.stopPropagation();
-        router.push(`/projects/${id}`);
+        router.push(`/projects/${route}`);
     };
 
     const divLinkClickHandler = (
@@ -72,7 +71,7 @@ const Project = ({
     };
 
     const divLinkEnterHandler = (event: KeyboardEvent<HTMLAnchorElement>) => {
-        if (event.key === 'Enter') router.push(`/projects/${id}`);
+        if (event.key === 'Enter') router.push(`/projects/${route}`);
     };
 
     const linkFocusHandler = () => {
@@ -102,7 +101,7 @@ const Project = ({
             border={isFocused ? '4px solid teal' : 'none'}
             overflow="hidden"
         >
-            <NextLink href={`/projects/${id}`} passHref>
+            <NextLink href={`/projects/${route}`} passHref>
                 <Link
                     display="block"
                     width="100%"
@@ -114,7 +113,7 @@ const Project = ({
                     _hover={{ textDecoration: 'none' }}
                 >
                     <Box
-                        aria-label={`${name} project`}
+                        aria-label={`${title} project`}
                         bg={`url(${images[0]}) no-repeat`}
                         bgSize="100% 100%"
                         bgPos="center"
@@ -157,7 +156,7 @@ const Project = ({
                         mb={{ base: '5px', sm: '10px' }}
                         color="white"
                     >
-                        {name}
+                        {title}
                     </Heading>
                     <Text
                         as="main"
@@ -165,7 +164,7 @@ const Project = ({
                         fontSize={{ base: '0.8rem', sm: '1rem' }}
                         color="white"
                     >
-                        {shortDescription}
+                        {summary}
                     </Text>
                     <HStack
                         wrap="wrap"
@@ -196,7 +195,7 @@ const Project = ({
                         <Tooltip label="Live website">
                             <MotionBox
                                 as={Link}
-                                aria-label={`${name} live website`}
+                                aria-label={`${title} live website`}
                                 rel="noopener noreferrer"
                                 href={live}
                                 onFocus={() => setisOverlayOpen(true)}
@@ -217,7 +216,7 @@ const Project = ({
                             <MotionBox
                                 as={Link}
                                 onClick={(e) => e.stopPropagation()}
-                                aria-label={`${name} source code`}
+                                aria-label={`${title} source code`}
                                 onFocus={() => setisOverlayOpen(true)}
                                 rel="noopener noreferrer"
                                 href={source}
@@ -231,7 +230,7 @@ const Project = ({
                     )}
                 </HStack>
                 <Box>
-                    <NextLink href={`/projects/${id}`} passHref>
+                    <NextLink href={`/projects/${route}`} passHref>
                         <Button
                             as="a"
                             onClick={(e) => e.stopPropagation()}
