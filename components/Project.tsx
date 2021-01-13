@@ -95,6 +95,7 @@ const Project = ({
                 delay: 0.2
             }}
             borderRadius="5px"
+            boxShadow="5px 5px 10px rgba(0,0,0,0.6)"
             exit={{ opacity: 0 }}
             width={{ base: '100%', sm: '450px', xl: '550px' }}
             height={{ base: '200px', sm: '300px', xl: '400px' }}
