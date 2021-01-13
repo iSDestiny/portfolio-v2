@@ -126,6 +126,7 @@ const Project = ({
                     >
                         <Image
                             src={images[0].src}
+                            alt={images[0].alt}
                             layout="fill"
                             objectFit="fill"
                         />

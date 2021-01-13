@@ -1,0 +1,51 @@
+---
+title: Maverick
+rank: 3
+summary: Web app that lets amazon warehouse employees keep track of inbound and outbound delivery trucks
+source: 'https://github.com/iSDestiny/react-quiz-app'
+live: 'https://isdestiny.github.io/react-quiz-app/'
+stack:
+    [
+        'Javascript',
+        'React',
+        'Styled Components',
+        'MaterialUI',
+        'Mongodb',
+        'Socket.io',
+        'Node',
+        'Express'
+    ]
+images:
+    [
+        { src: '/project-images/maverick/main-page.png', alt: 'main page' },
+        { src: '/project-images/maverick/admin-page.png', alt: 'admin page' }
+    ]
+---
+
+## About this project
+
+My friend who was a manager at a local Amazon Warehouse had a problem at work that he commisioned me to create a web app
+to solve. The problem he had at work was how they kept track of inbound delivery trucks and outbound delivery trucks. Their
+current system at the time was to fill out three big whiteboards with the same information. This system was very inefficient
+and was prone to human errors since they needed to enter the same information on three seperate whiteboards. My friend
+wanted a system where he could input the outbound and inbound information on some kind of user interface and the data
+will be shown on three different TVs. To build what he wanted I used React with MaterialUI and styled components to create
+the frontend portion of the web app and used Node and Express for the backend and Mongodb to store the data.
+Since the data had to be displayed in real time on separate TVs, simple http requests was not enough, therefore I had to use socket.io.
+This app greatly increased the efficiency of keeping track of inbound and outbound delivery trucks because rather than having to
+fill out three different whiteboards with the same exact information they only had to fill out a single UI and the changes
+would reflect in real time on the TVs.
+
+## Technologies Used
+
+### Frontend
+
+-   HTML
+-   Styled Components (CSS in js)
+-   React
+
+### Backend
+
+-   Node.js
+-   MongoDB (noSQL DB)
+-   Mongoose (ODM for mongodb)
