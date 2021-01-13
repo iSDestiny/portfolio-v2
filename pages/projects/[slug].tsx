@@ -182,7 +182,7 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                         live={live}
                     />
                     <Carousel
-                        boxShadow="5px 5px 5px rgba(0,0,0,0.6)"
+                        boxShadow="5px 5px 10px rgba(0,0,0,0.6)"
                         my="1rem"
                         _focus={{
                             outline: '4px solid teal'
