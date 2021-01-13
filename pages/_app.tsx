@@ -6,8 +6,20 @@ import 'overlayscrollbars/css/OverlayScrollbars.css';
 import 'react-responsive-carousel/lib/styles/carousel.min.css';
 import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'react-image-lightbox/style.css';
+import * as gtag from 'utils/gtag';
+import { useEffect } from 'react';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
+    useEffect(() => {
+        const handleRouteChange = (url: URL) => {
+            gtag.pageview(url);
+        };
+        router.events.on('routeChangeComplete', handleRouteChange);
+        return () => {
+            router.events.off('routeChangeComplete', handleRouteChange);
+        };
+    }, [router.events]);
+
     return (
         <>
             <ChakraProvider>
