@@ -57,7 +57,7 @@ const ProjectHeader = ({
                 >
                     {summary}
                 </Heading>
-                <Wrap spacing="0.7rem" width="100%" mt="1rem">
+                <Wrap spacing="0.4rem" width="100%" mt="1rem">
                     {stack.map((tech) => (
                         <WrapItem key={tech}>
                             <Tag
