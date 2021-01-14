@@ -153,7 +153,7 @@ const Project = ({
                 exit={{ opacity: 0 }}
                 variants={variants}
                 transition={{ delay: 0.2 }}
-                p={{ base: '0.7rem 0', sm: '1rem 3rem' }}
+                p={{ base: '0.7rem 0.1rem', sm: '1rem 3rem' }}
                 cursor="pointer"
             >
                 <Box>
