@@ -9,7 +9,7 @@ class MyDocument extends Document {
 
     render() {
         return (
-            <Html lang="en-us">
+            <Html lang="en">
                 <Head>
                     {process.env.NODE_ENV === 'production' && (
                         <>
@@ -31,25 +31,29 @@ class MyDocument extends Document {
                             />
                         </>
                     )}
-
+                    <meta content="#4FD1C5" name="theme-color" />
+                    <meta content="#4FD1C5" name="msapplication-TileColor" />
                     <link
                         rel="apple-touch-icon"
                         sizes="180x180"
-                        href="/apple-touch-icon.png"
+                        href="/static/favicons/apple-touch-icon.png"
                     />
                     <link
                         rel="icon"
                         type="image/png"
                         sizes="32x32"
-                        href="/favicon-32x32.png"
+                        href="/static/favicons/favicon-32x32.png"
                     />
                     <link
                         rel="icon"
                         type="image/png"
                         sizes="16x16"
-                        href="/favicon-16x16.png"
+                        href="/static/favicons/favicon-16x16.png"
                     />
-                    <link rel="manifest" href="/site.webmanifest" />
+                    <link
+                        rel="manifest"
+                        href="/static/favicons/site.webmanifest"
+                    />
                 </Head>
                 <body>
                     <Main />

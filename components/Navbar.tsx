@@ -54,8 +54,8 @@ const Navbar = () => {
                                 alt="personal brand logo"
                                 src={
                                     colorMode === 'light'
-                                        ? '/j-full-logo-transparent-black.png'
-                                        : '/j-full-logo-transparent-white.png'
+                                        ? '/static/logos/j-full-logo-transparent-black.png'
+                                        : '/static/logos/j-full-logo-transparent-white.png'
                                 }
                             />
                         </Link>
