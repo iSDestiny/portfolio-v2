@@ -14,30 +14,34 @@ import { DefaultSeo } from 'next-seo';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
     useEffect(() => {
-        const handleRouteChange = (url: URL) => {
-            gtag.pageview(url);
-        };
-        router.events.on('routeChangeComplete', handleRouteChange);
-        return () => {
-            router.events.off('routeChangeComplete', handleRouteChange);
-        };
+        if (process.env.NODE_ENV === 'production') {
+            const handleRouteChange = (url: URL) => {
+                gtag.pageview(url);
+            };
+            router.events.on('routeChangeComplete', handleRouteChange);
+            return () => {
+                router.events.off('routeChangeComplete', handleRouteChange);
+            };
+        }
     }, [router.events]);
 
     return (
-        <ChakraProvider>
-            <OverlayScrollbarsComponent>
-                <AnimatePresence exitBeforeEnter>
-                    <Head>
-                        <meta
-                            content="width=device-width, initial-scale=1"
-                            name="viewport"
-                        />
-                    </Head>
-                    <DefaultSeo {...SEO} />
-                    <Component {...pageProps} key={router.route} />
-                </AnimatePresence>
-            </OverlayScrollbarsComponent>
-        </ChakraProvider>
+        <>
+            <Head>
+                <meta
+                    content="width=device-width, initial-scale=1"
+                    name="viewport"
+                />
+            </Head>
+            <DefaultSeo {...SEO} />
+            <ChakraProvider>
+                <OverlayScrollbarsComponent>
+                    <AnimatePresence exitBeforeEnter>
+                        <Component {...pageProps} key={router.route} />
+                    </AnimatePresence>
+                </OverlayScrollbarsComponent>
+            </ChakraProvider>
+        </>
     );
 }
 

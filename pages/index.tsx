@@ -23,6 +23,7 @@ const About = () => {
                 as="main"
                 justify="center"
                 align="center"
+                pb="2rem"
                 height="calc(100vh - 90px)"
             >
                 <MotionBox

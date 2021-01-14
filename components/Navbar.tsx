@@ -31,6 +31,7 @@ const Navbar = () => {
                         <MobileNav
                             isOpen={isMenuOpen}
                             setIsOpen={setIsMenuOpen}
+                            key="mobile-nav"
                         />
                     </>
                 )}
@@ -54,8 +55,8 @@ const Navbar = () => {
                                 alt="personal brand logo"
                                 src={
                                     colorMode === 'light'
-                                        ? '/static/logos/j-full-logo-transparent-black.png'
-                                        : '/static/logos/j-full-logo-transparent-white.png'
+                                        ? '/static/logos/brand/j-full-logo-transparent-black.png'
+                                        : '/static/logos/brand/j-full-logo-transparent-white.png'
                                 }
                             />
                         </Link>

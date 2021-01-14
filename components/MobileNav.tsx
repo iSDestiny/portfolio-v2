@@ -44,7 +44,6 @@ const MobileNav = ({ isOpen, setIsOpen }: MobileNavProps) => {
     return (
         <MotionBox
             display={{ base: 'block', md: 'none' }}
-            key="menu"
             transform="translateY(-100%)"
             initial="closed"
             animate="open"
