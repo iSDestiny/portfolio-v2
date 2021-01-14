@@ -8,6 +8,9 @@ import { OverlayScrollbarsComponent } from 'overlayscrollbars-react';
 import 'react-image-lightbox/style.css';
 import * as gtag from 'utils/gtag';
 import { useEffect } from 'react';
+import Head from 'next/head';
+import SEO from 'next-seo.config';
+import { DefaultSeo } from 'next-seo';
 
 function MyApp({ Component, pageProps, router }: AppProps) {
     useEffect(() => {
@@ -21,15 +24,20 @@ function MyApp({ Component, pageProps, router }: AppProps) {
     }, [router.events]);
 
     return (
-        <>
-            <ChakraProvider>
-                <OverlayScrollbarsComponent>
-                    <AnimatePresence exitBeforeEnter>
-                        <Component {...pageProps} key={router.route} />
-                    </AnimatePresence>
-                </OverlayScrollbarsComponent>
-            </ChakraProvider>
-        </>
+        <ChakraProvider>
+            <OverlayScrollbarsComponent>
+                <AnimatePresence exitBeforeEnter>
+                    <Head>
+                        <meta
+                            content="width=device-width, initial-scale=1"
+                            name="viewport"
+                        />
+                    </Head>
+                    <DefaultSeo {...SEO} />
+                    <Component {...pageProps} key={router.route} />
+                </AnimatePresence>
+            </OverlayScrollbarsComponent>
+        </ChakraProvider>
     );
 }
 

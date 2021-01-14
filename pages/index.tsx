@@ -3,7 +3,6 @@ import MotionBox from 'components/MotionBox';
 import Socials from 'components/Socials';
 import { useRouter } from 'next/router';
 import Navbar from 'components/Navbar';
-import Head from 'next/head';
 import React from 'react';
 
 const About = () => {
@@ -11,14 +10,6 @@ const About = () => {
 
     return (
         <Box position="fixed" overflow="hidden" width="100%" height="100%">
-            <Head>
-                <title>Jason Bugallon's Web Developer Portfolio</title>
-                <meta
-                    name="description"
-                    key="description"
-                    content="Jason Bugallon's web developer portfolio"
-                />
-            </Head>
             <style jsx global>
                 {`
                     html,

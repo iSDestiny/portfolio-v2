@@ -7,9 +7,14 @@ import fs from 'fs';
 import matter from 'gray-matter';
 import useCustomScrollbar from 'hooks/useCustomScrollbar';
 import { GetStaticProps } from 'next';
-import Head from 'next/head';
+import { NextSeo } from 'next-seo';
 import path from 'path';
 import { projectFilePaths, PROJECTS_PATH } from 'utils/mdxUtils';
+
+const title = 'Projects | Jason Bugallon';
+const description =
+    'My collection of software projects that I have created throughout my time as a developer';
+const url = 'https://jasonbugallon.com/projects';
 
 interface ProjectsProps {
     projects: ProjectType[];
@@ -20,16 +25,16 @@ const Projects = ({ projects }: ProjectsProps) => {
 
     return (
         <>
-            <Head>
-                <title key="title">
-                    Projects | Jason Bugallon's Web Developer Portfolio
-                </title>
-                <meta
-                    name="description"
-                    key="description"
-                    content="Jason Bugallon's software projects collection"
-                />
-            </Head>
+            <NextSeo
+                title={title}
+                description={description}
+                canonical={url}
+                openGraph={{
+                    url,
+                    title,
+                    description
+                }}
+            />
             <Navbar />
             <Flex
                 as="main"

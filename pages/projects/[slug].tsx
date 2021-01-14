@@ -22,12 +22,13 @@ import useCustomScrollbar from 'hooks/useCustomScrollbar';
 import { GetStaticPaths, GetStaticProps } from 'next';
 import hydrate from 'next-mdx-remote/hydrate';
 import renderToString from 'next-mdx-remote/render-to-string';
-import Head from 'next/head';
 import path from 'path';
 import { KeyboardEvent, useState } from 'react';
 import { Carousel as RRCarousel } from 'react-responsive-carousel';
 import Lightbox from 'react-image-lightbox';
 import { projectFilePaths, PROJECTS_PATH } from 'utils/mdxUtils';
+import { NextSeo } from 'next-seo';
+import { useRouter } from 'next/router';
 
 interface ProjectPageProps {
     source: string;
@@ -106,6 +107,8 @@ const components = {
 };
 
 const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
+    const router = useRouter();
+    const url = `https://jasonbugallon.com/${router.pathname}`;
     const {
         title,
         summary,
@@ -146,12 +149,17 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                     }
                 />
             )}
-            <Head>
-                <title>
-                    {`${title} `} | Jason Bugallon's Web Developer Portfolio
-                </title>
-                <meta name="description" key="description" content={summary} />
-            </Head>
+            <NextSeo
+                title={`${title} | Jason Bugallon`}
+                description={summary}
+                canonical={url}
+                openGraph={{
+                    url,
+                    title,
+                    description: summary,
+                    images: [{ url: images[0].src, alt: title }]
+                }}
+            />
             <Navbar />
             <Flex
                 as="main"
