@@ -16,8 +16,8 @@ const SEO = {
             {
                 url: 'https://jasonbugallon.com/static/images/banner.png',
                 alt: title,
-                width: 1200,
-                height: 720
+                width: 1250,
+                height: 650
             }
         ]
     },
