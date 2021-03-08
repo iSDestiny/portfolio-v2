@@ -36,7 +36,7 @@ interface ProjectPageProps {
         title: string;
         summary: string;
         source: string;
-        images: { src: string; alt: string }[];
+        images: { src: string; alt: string; type: string }[];
         stack: string[];
         live?: string;
     };
@@ -203,7 +203,7 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                         useKeyboardArrows
                         dynamicHeight
                     >
-                        {images.map(({ src, alt }, index) => (
+                        {images.map(({ src, alt, type }, index) => (
                             <Box
                                 key={index}
                                 tabIndex={0}
@@ -213,7 +213,9 @@ const ProjectPage = ({ source, frontMatter }: ProjectPageProps) => {
                                 <Image
                                     src={src}
                                     alt={alt}
-                                    width="1000px"
+                                    width={
+                                        type && type === 'mobile' ? 277 : 1000
+                                    }
                                     height="600px"
                                 />
                             </Box>

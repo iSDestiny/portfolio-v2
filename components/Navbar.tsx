@@ -15,8 +15,9 @@ import { useState } from 'react';
 import FocusLock from 'react-focus-lock';
 import { FaMoon, FaSun } from 'react-icons/fa';
 import MenuToggle from './MenuToggle';
-import MobileNav from './MobileNav';
 import MotionBox from './MotionBox';
+import dynamic from 'next/dynamic';
+const MobileNav = dynamic(import('./MobileNav'));
 
 const Navbar = () => {
     const [isMenuOpen, setIsMenuOpen] = useState(false);
