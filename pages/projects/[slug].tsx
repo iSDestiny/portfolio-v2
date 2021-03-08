@@ -99,7 +99,7 @@ const components = {
             {children}
         </Heading>
     ),
-    p: ({ children }: mdxNodeProps) => <Text fontSize="lg">{children}</Text>,
+    p: ({ children }: mdxNodeProps) => <Text fontSize="md">{children}</Text>,
     ul: ({ children }: mdxNodeProps) => (
         <UnorderedList pl="1rem">{children}</UnorderedList>
     ),
